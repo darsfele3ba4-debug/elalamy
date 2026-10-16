@@ -398,6 +398,17 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
                         <option value="30">30 seconds</option>
                     </select>
                 </div>
+                <div>
+                    <label><i class="fas fa-list-ol"></i> Questions per team</label>
+                    <select id="q-count" onchange="setMode(currentMode)">
+                        <option value="5">5 questions</option>
+                        <option value="10" selected>10 questions</option>
+                        <option value="15">15 questions</option>
+                        <option value="20">20 questions</option>
+                        <option value="25">25 questions</option>
+                        <option value="30">30 questions</option>
+                    </select>
+                </div>
             </div>
 
             <div class="menu-grid">
@@ -505,7 +516,22 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
         const UNIT_NAME = "Facing Challenges";
 
         const TEACHER_PHONE = '201099151531';
-        const Q_PER_TEAM = 10;
+        let Q_PER_TEAM = 10;            // questions per team in a competition (chosen by the teacher)
+
+        // Reads the "Questions per team" choice, never more than the current bank holds.
+        function readQCount() {
+            const sel = document.getElementById('q-count');
+            const max = currentBank().length;
+            if (sel) {
+                Array.from(sel.options).forEach(o => { o.disabled = parseInt(o.value, 10) > max; });
+                if (sel.selectedOptions[0] && sel.selectedOptions[0].disabled) {
+                    const ok = Array.from(sel.options).filter(o => !o.disabled);
+                    if (ok.length) sel.value = ok[ok.length - 1].value;
+                }
+            }
+            const n = sel ? parseInt(sel.value, 10) : 10;
+            return Math.max(1, Math.min(n || 10, max));
+        }
         const SOLO_COUNT = 30;          // questions per solo game when the bank is large
         const LARGE_BANK = 40;          // banks bigger than this are sampled instead of played in full
 
@@ -608,6 +634,7 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
             document.getElementById('comp-settings').style.display = mode === 'comp' ? 'grid' : 'none';
             const bankSize = currentBank().length;
             const n = soloCount(currentBank());
+            Q_PER_TEAM = readQCount();
             document.getElementById('mode-hint').innerHTML = mode === 'solo'
                 ? '<i class="fas fa-info-circle"></i> Play on your own — ' + n + ' questions in a new random order every time, no time limit.' +
                   (n < bankSize ? ' A new random set from ' + bankSize + ' questions every time you play.' : '')
@@ -700,6 +727,7 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
             stopAll();
             currentGameId = gameId;
             runMode = currentMode;
+            Q_PER_TEAM = readQCount();
 
             // Falling Bubbles and Target Practice need short answers to fit inside the moving shapes
             const moving = (gameId === 2 || gameId === 3);
