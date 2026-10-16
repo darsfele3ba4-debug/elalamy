@@ -368,7 +368,37 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
             <button class="btn-section" onclick="switchScreen('section-select')"><i class="fas fa-arrow-left"></i> Back to Sections</button>
             <h2 id="menu-title">Choose a game:</h2>
             <p id="menu-desc"></p>
+            <div class="mode-switch">
+                <button class="mode-btn active" id="mode-solo" onclick="setMode('solo')"><i class="fas fa-user"></i> Play Now</button>
+                <button class="mode-btn" id="mode-comp" onclick="setMode('comp')"><i class="fas fa-users"></i> Team Competition</button>
+            </div>
             <p class="mode-hint" id="mode-hint"></p>
+
+            <div class="comp-settings" id="comp-settings" style="display:none">
+                <div>
+                    <label><i class="fas fa-users" style="color:#2563eb"></i> Team 1 name</label>
+                    <input type="text" id="team1-name" value="Team A" maxlength="20">
+                </div>
+                <div>
+                    <label><i class="fas fa-users" style="color:#ea580c"></i> Team 2 name</label>
+                    <input type="text" id="team2-name" value="Team B" maxlength="20">
+                </div>
+                <div>
+                    <label><i class="fas fa-random"></i> Questions</label>
+                    <select id="q-mode">
+                        <option value="different" selected>Different questions for each team</option>
+                        <option value="same">Same questions, different order</option>
+                    </select>
+                </div>
+                <div>
+                    <label><i class="fas fa-stopwatch"></i> Time per question</label>
+                    <select id="q-time">
+                        <option value="15">15 seconds</option>
+                        <option value="20" selected>20 seconds</option>
+                        <option value="30">30 seconds</option>
+                    </select>
+                </div>
+            </div>
 
             <div class="menu-grid">
                 <div class="game-card" onclick="startGame(1)"><i class="fas fa-list-ul"></i><h3>Multiple Choice</h3></div>
@@ -407,6 +437,26 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
                 <button class="btn-back" style="background: var(--dark); box-shadow: 0 5px 0 #000;" onclick="returnToMenu()"><i class="fas fa-home"></i> Main Menu</button>
             </div>
         </div>
+
+        <!-- Competition results -->
+        <div id="results-screen" class="screen">
+            <h2>Competition Over!</h2>
+            <div class="winner-banner" id="winner-banner"></div>
+            <div class="score-cards" id="score-cards"></div>
+
+            <div class="whatsapp-share">
+                <p>📩 Send the competition result to Mr Marwan Elsayyad</p>
+                <input type="text" id="class-name-input" class="name-input" placeholder="Class name (optional)">
+                <br>
+                <button class="btn-whatsapp" onclick="sendCompResult()"><i class="fab fa-whatsapp"></i> Send Result via WhatsApp</button>
+            </div>
+
+            <div class="results-actions">
+                <button class="btn-section" onclick="startGame(currentGameId)"><i class="fas fa-redo"></i> Rematch</button>
+                <button class="btn-back" style="background: var(--dark); box-shadow: 0 5px 0 #000;" onclick="returnToMenu()"><i class="fas fa-home"></i> Main Menu</button>
+            </div>
+        </div>
+    </div>
 
     <footer class="main-footer">
         Mr Marwan Elsayyad — <span class="brand-mini">Al'Alamy</span>
@@ -482,7 +532,16 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
                 chosen = shuffle(pool.concat(extra));
                 seen = extra.slice();
             }
-            try { localStorage.setItem(key, JSON.stringify({ len: bank.length, seen: seen })); } catch (e) {}
+            let lastFirst = -1;
+            try { lastFirst = parseInt(localStorage.getItem(key + ':first'), 10); } catch (e) {}
+            if (chosen.length > 1 && chosen[0] === lastFirst) {
+                const j = 1 + Math.floor(Math.random() * (chosen.length - 1));
+                [chosen[0], chosen[j]] = [chosen[j], chosen[0]];
+            }
+            try {
+                localStorage.setItem(key, JSON.stringify({ len: bank.length, seen: seen }));
+                localStorage.setItem(key + ':first', String(chosen[0]));
+            } catch (e) {}
             return chosen.map(i => bank[i]);
         }
         const GAME_NAMES = { 1: 'Multiple Choice', 2: 'Falling Bubbles', 3: 'Target Practice', 4: 'True or False', 5: 'Advanced Challenge' };
@@ -543,12 +602,16 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
         }
 
         function setMode(mode) {
-            currentMode = 'solo';
+            currentMode = mode;
+            document.getElementById('mode-solo').classList.toggle('active', mode === 'solo');
+            document.getElementById('mode-comp').classList.toggle('active', mode === 'comp');
+            document.getElementById('comp-settings').style.display = mode === 'comp' ? 'grid' : 'none';
             const bankSize = currentBank().length;
             const n = soloCount(currentBank());
-            document.getElementById('mode-hint').innerHTML =
-                '<i class="fas fa-info-circle"></i> Play on your own — ' + n + ' questions, no time limit.' +
-                (n < bankSize ? ' A new random set from ' + bankSize + ' questions every time you play.' : '');
+            document.getElementById('mode-hint').innerHTML = mode === 'solo'
+                ? '<i class="fas fa-info-circle"></i> Play on your own — ' + n + ' questions in a new random order every time, no time limit.' +
+                  (n < bankSize ? ' A new random set from ' + bankSize + ' questions every time you play.' : '')
+                : '<i class="fas fa-info-circle"></i> Two teams play at the same time, each on its own half of the screen — ' + Q_PER_TEAM + ' questions per team, shuffled every round. Highest score wins; if scores are equal, the faster team wins.';
         }
 
         function buildQuestion(t, type) {
