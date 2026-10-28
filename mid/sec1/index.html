@@ -327,6 +327,10 @@ body.compact .main-footer { display: none; }
 body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
 
 /* ===== Exam additions ===== */
+.countdown-overlay .announce { font-size: 4.5rem; text-align: center; line-height: 1.2; padding: 0 16px; }
+.countdown-overlay .announce small { display: block; font-size: 1.6rem; color: #fff; font-weight: 700; margin-top: 14px; font-family: 'Poppins', sans-serif; }
+.tb-line { color: #b45309 !important; font-weight: 800 !important; }
+@media (max-width: 768px) { .countdown-overlay .announce { font-size: 2.6rem; } .countdown-overlay .announce small { font-size: 1.15rem; } }
 .team-panel.solo .timer-num, .team-panel.solo .timer-bar { display: block; }
 .team-panel.solo .team-meta { margin-bottom: 6px; }
 .exam-hero { display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin: 6px 0 22px; }
@@ -381,7 +385,7 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
             <h2>Sec 1 English Exam</h2>
             <p>Units 1, 2 & 3 — Term 1</p>
             <div class="exam-hero">
-                <span class="exam-chip"><i class="fas fa-list-ol"></i> 30 questions</span>
+                <span class="exam-chip"><i class="fas fa-list-ol"></i> 40 questions</span>
                 <span class="exam-chip"><i class="fas fa-stopwatch"></i> 30 seconds per question</span>
                 <span class="exam-chip"><i class="fas fa-random"></i> New order every time</span>
             </div>
@@ -405,7 +409,8 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
             <div class="rules" id="comp-rules" style="display:none">
                 <i class="fas fa-stopwatch"></i> 30 seconds for every question.<br>
                 <i class="fas fa-random"></i> Both teams get the same 30 questions, but in a different order.<br>
-                <i class="fas fa-trophy"></i> Highest score wins — if scores are equal, the faster team wins.
+                <i class="fas fa-bolt"></i> If the scores are equal, a tie-break round of 10 more questions decides the winner.<br>
+                <i class="fas fa-trophy"></i> Highest score wins.
             </div>
 
             <button class="btn-start" onclick="startExam()"><i class="fas fa-play"></i> Start the Exam</button>
@@ -498,8 +503,9 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
 
         const EXAM_LABEL = "Sec 1";
         const EXAM_UNITS = "Units 1, 2 & 3";
-        const BANK = [{"unit": 1, "text": "Be careful when you reach the _____ because cars may come from all directions.", "ans": "crossroads", "wrong": ["bridge", "stoppage", "pavement"]}, {"unit": 1, "text": "The government works hard to _____ Egypt's ancient monuments for future generations.", "ans": "preserve", "wrong": ["establish", "waste", "decorate"]}, {"unit": 1, "text": "The Silk Road allowed _____ to trade valuable goods between Asia and Europe.", "ans": "merchants", "wrong": ["consumers", "kings", "musicians"]}, {"unit": 1, "text": "The letter _____ two days ago, but I still haven't read it.", "ans": "was delivered", "wrong": ["delivers", "delivered", "has delivered"]}, {"unit": 1, "text": "We _____ to that old cinema every Friday, but it closed down last year.", "ans": "used to go", "wrong": ["go", "are going", "have gone"]}, {"unit": 1, "text": "Preserving our _____ helps future generations understand where they came from.", "ans": "heritage", "wrong": ["household", "highlight", "hindrance"]}, {"unit": 1, "text": "Doctors have found a _____ between lack of sleep and poor concentration.", "ans": "connection", "wrong": ["hazard", "hindrance", "habitat"]}, {"unit": 1, "text": "The old man's _____ began to weaken, so he had to wear glasses.", "ans": "vision", "wrong": ["hearing", "balance", "appetite"]}, {"unit": 1, "text": "_____ the meeting, everyone listened carefully to the manager.", "ans": "During", "wrong": ["On", "When", "While"]}, {"unit": 1, "text": "Just as the train _____, two passengers arrived at the station.", "ans": "was leaving", "wrong": ["leaves", "left", "was left"]}, {"unit": 2, "text": "Karma's _____ grew as she received more positive feedback on her work.", "ans": "confidence", "wrong": ["confident", "confidential", "confidentially"]}, {"unit": 2, "text": "The hikers got lost and ended up in a/an _____ area with no phone signal.", "ans": "isolated", "wrong": ["confident", "inspired", "connected"]}, {"unit": 2, "text": "It's rude to _____ at people, even if they look unusual.", "ans": "stare", "wrong": ["connect", "inspire", "glance"]}, {"unit": 2, "text": "Because of the storm, the fishermen _____ return to the shore yesterday.", "ans": "had to", "wrong": ["have to", "don't have to", "will have to"]}, {"unit": 2, "text": "To enter the museum, visitors _____ buy a ticket at the entrance.", "ans": "have to", "wrong": ["has to", "should have", "had to"]}, {"unit": 2, "text": "In case of _____, please use the stairs instead of the elevator.", "ans": "emergency", "wrong": ["appointment", "ceremony", "routine"]}, {"unit": 2, "text": "It would be _____ to walk alone in that neighborhood late at night.", "ans": "risky", "wrong": ["typical", "pleasant", "convenient"]}, {"unit": 2, "text": "Without _____, it's difficult to build strong relationships with others.", "ans": "empathy", "wrong": ["currency", "routine", "authority"]}, {"unit": 2, "text": "The museum is only five minutes away, so we _____ take a taxi.", "ans": "needn't", "wrong": ["have to", "must", "should"]}, {"unit": 2, "text": "My father repaired the old bike, so I _____ a new one.", "ans": "needn't have bought", "wrong": ["had to buy", "should buy", "needn't buy"]}, {"unit": 3, "text": "The soldier was accused of _____ his fellow troops by leaking their plans to the enemy.", "ans": "betraying", "wrong": ["volunteering", "empathizing", "rewarding"]}, {"unit": 3, "text": "That hotel has a bad _____ for poor customer service.", "ans": "reputation", "wrong": ["emergency", "reward", "connection"]}, {"unit": 3, "text": "Social media is full of _____ news stories designed to mislead people.", "ans": "fake", "wrong": ["accurate", "verified", "informed"]}, {"unit": 3, "text": "If Youssef had a bicycle, he _____ to school every day.", "ans": "would ride", "wrong": ["rides", "will ride", "would have ridden"]}, {"unit": 3, "text": "If Ali _____ more carefully, he wouldn't have broken the vase.", "ans": "had walked", "wrong": ["walks", "walked", "have walked"]}, {"unit": 3, "text": "If I see Mona tomorrow, I _____ her your message.", "ans": "will give", "wrong": ["give", "would give", "would have given"]}, {"unit": 3, "text": "He got upset because of a false _____ about his family.", "ans": "rumor", "wrong": ["price", "lesson", "rule"]}, {"unit": 3, "text": "The art class is a great way to boost _____ in young kids.", "ans": "creativity", "wrong": ["denial", "weight", "height"]}, {"unit": 3, "text": "_____ your kindness, I wouldn't have finished the work on time.", "ans": "But for", "wrong": ["Unless", "In case", "Should"]}, {"unit": 3, "text": "_____ the weather to improve, we would go on a picnic.", "ans": "Were", "wrong": ["Had", "Should", "Unless"]}];
+        const BANK = [{"unit": 1, "text": "Be careful when you reach the _____ because cars may come from all directions.", "ans": "crossroads", "wrong": ["bridge", "stoppage", "pavement"]}, {"unit": 1, "text": "The government works hard to _____ Egypt's ancient monuments for future generations.", "ans": "preserve", "wrong": ["establish", "waste", "decorate"]}, {"unit": 1, "text": "The Silk Road allowed _____ to trade valuable goods between Asia and Europe.", "ans": "merchants", "wrong": ["consumers", "kings", "musicians"]}, {"unit": 1, "text": "The letter _____ two days ago, but I still haven't read it.", "ans": "was delivered", "wrong": ["delivers", "delivered", "has delivered"]}, {"unit": 1, "text": "We _____ to that old cinema every Friday, but it closed down last year.", "ans": "used to go", "wrong": ["go", "are going", "have gone"]}, {"unit": 1, "text": "Preserving our _____ helps future generations understand where they came from.", "ans": "heritage", "wrong": ["household", "highlight", "hindrance"]}, {"unit": 1, "text": "Doctors have found a _____ between lack of sleep and poor concentration.", "ans": "connection", "wrong": ["hazard", "hindrance", "habitat"]}, {"unit": 1, "text": "The old man's _____ began to weaken, so he had to wear glasses.", "ans": "vision", "wrong": ["hearing", "balance", "appetite"]}, {"unit": 1, "text": "_____ the meeting, everyone listened carefully to the manager.", "ans": "During", "wrong": ["On", "When", "While"]}, {"unit": 1, "text": "Just as the train _____, two passengers arrived at the station.", "ans": "was leaving", "wrong": ["leaves", "left", "was left"]}, {"unit": 2, "text": "Karma's _____ grew as she received more positive feedback on her work.", "ans": "confidence", "wrong": ["confident", "confidential", "confidentially"]}, {"unit": 2, "text": "The hikers got lost and ended up in a/an _____ area with no phone signal.", "ans": "isolated", "wrong": ["confident", "inspired", "connected"]}, {"unit": 2, "text": "It's rude to _____ at people, even if they look unusual.", "ans": "stare", "wrong": ["connect", "inspire", "glance"]}, {"unit": 2, "text": "Because of the storm, the fishermen _____ return to the shore yesterday.", "ans": "had to", "wrong": ["have to", "don't have to", "will have to"]}, {"unit": 2, "text": "To enter the museum, visitors _____ buy a ticket at the entrance.", "ans": "have to", "wrong": ["has to", "should have", "had to"]}, {"unit": 2, "text": "In case of _____, please use the stairs instead of the elevator.", "ans": "emergency", "wrong": ["appointment", "ceremony", "routine"]}, {"unit": 2, "text": "It would be _____ to walk alone in that neighborhood late at night.", "ans": "risky", "wrong": ["typical", "pleasant", "convenient"]}, {"unit": 2, "text": "Without _____, it's difficult to build strong relationships with others.", "ans": "empathy", "wrong": ["currency", "routine", "authority"]}, {"unit": 2, "text": "The museum is only five minutes away, so we _____ take a taxi.", "ans": "needn't", "wrong": ["have to", "must", "should"]}, {"unit": 2, "text": "My father repaired the old bike, so I _____ a new one.", "ans": "needn't have bought", "wrong": ["had to buy", "should buy", "needn't buy"]}, {"unit": 3, "text": "The soldier was accused of _____ his fellow troops by leaking their plans to the enemy.", "ans": "betraying", "wrong": ["volunteering", "empathizing", "rewarding"]}, {"unit": 3, "text": "That hotel has a bad _____ for poor customer service.", "ans": "reputation", "wrong": ["emergency", "reward", "connection"]}, {"unit": 3, "text": "Social media is full of _____ news stories designed to mislead people.", "ans": "fake", "wrong": ["accurate", "verified", "informed"]}, {"unit": 3, "text": "If Youssef had a bicycle, he _____ to school every day.", "ans": "would ride", "wrong": ["rides", "will ride", "would have ridden"]}, {"unit": 3, "text": "If Ali _____ more carefully, he wouldn't have broken the vase.", "ans": "had walked", "wrong": ["walks", "walked", "have walked"]}, {"unit": 3, "text": "If I see Mona tomorrow, I _____ her your message.", "ans": "will give", "wrong": ["give", "would give", "would have given"]}, {"unit": 3, "text": "He got upset because of a false _____ about his family.", "ans": "rumor", "wrong": ["price", "lesson", "rule"]}, {"unit": 3, "text": "The art class is a great way to boost _____ in young kids.", "ans": "creativity", "wrong": ["denial", "weight", "height"]}, {"unit": 3, "text": "_____ your kindness, I wouldn't have finished the work on time.", "ans": "But for", "wrong": ["Unless", "In case", "Should"]}, {"unit": 3, "text": "_____ the weather to improve, we would go on a picnic.", "ans": "Were", "wrong": ["Had", "Should", "Unless"]}, {"unit": 1, "text": "After years of smoking, he finally decided to _____ for the sake of his health.", "ans": "quit", "wrong": ["quota", "quite", "quiet"]}, {"unit": 1, "text": "Remember to _____ deeply during moments of stress.", "ans": "breathe", "wrong": ["breeze", "breath", "breathing"]}, {"unit": 1, "text": "Tom didn't _____ to find his lost keys in the jacket pocket.", "ans": "expect", "wrong": ["except", "accept", "concept"]}, {"unit": 2, "text": "Yasser as well as his brothers _____ upset yesterday.", "ans": "was", "wrong": ["were", "is", "are"]}, {"unit": 2, "text": "I drank _____ water; now I really need to go to the bathroom.", "ans": "too much", "wrong": ["too many", "enough", "so"]}, {"unit": 2, "text": "The poor _____ sensitive.", "ans": "are always", "wrong": ["always are", "always is", "is always"]}, {"unit": 2, "text": "I was _____ of my wallet.", "ans": "robbed", "wrong": ["robbing", "stealing", "stolen"]}, {"unit": 2, "text": "_____ your hand if you have a question.", "ans": "Raise", "wrong": ["Rise", "Arise", "Arouse"]}, {"unit": 3, "text": "_____ the challenges, the team achieved their goal.", "ans": "Despite", "wrong": ["In spite", "However", "Although"]}, {"unit": 3, "text": "When the ship sank, the _____ were saved by a passing ship.", "ans": "crew", "wrong": ["staff", "stuff", "personnel"]}];
         const TEACHER_PHONE = '201099151531';
+        const MAIN_COUNT = 30;             // questions in the main competition round (rest = tie-break round)
         const COMP_TIME = 30;              // seconds per question (solo and team competition)
 
         let mode = 'solo';
@@ -510,6 +516,10 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
         let countdownTimer = null;
         let endTimeout = null;
         let lastResultText = '';
+        let phase = 'main';                // 'main' or 'tie'
+        let tiePool = [];                  // question indexes kept for the tie-break round
+        let mainRes = null;                // main-round results saved when a tie-break starts
+        let teamNames = ['Team A', 'Team B'];
 
         const screens = document.querySelectorAll('.screen');
         const arena = document.getElementById('arena');
@@ -565,8 +575,9 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
         }
 
         // Same questions for both teams, but never in the same order
-        function teamOrders() {
-            const a = freshOrder();
+        // Same questions for both teams, but never in the same order
+        function teamOrders(pool) {
+            const a = shuffle(pool);
             let b;
             do { b = shuffle(a); } while (a.length > 1 && (b[0] === a[0] || b.every((v, i) => v === a[i])));
             return [a, b];
@@ -642,10 +653,15 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
             }
 
             questionTime = COMP_TIME;
-            const names = [val('team1-name') || 'Team A', val('team2-name') || 'Team B'];
-            const orders = teamOrders();
+            teamNames = [val('team1-name') || 'Team A', val('team2-name') || 'Team B'];
+            const all = freshOrder();
+            const main = all.slice(0, MAIN_COUNT);
+            tiePool = all.slice(MAIN_COUNT);
+            phase = 'main';
+            mainRes = null;
+            const orders = teamOrders(main);
             arena.className = 'arena';
-            teams = [0, 1].map(i => createTeam(i, names[i], orders[i].map(k => makeQ(BANK[k])), false));
+            teams = [0, 1].map(i => createTeam(i, teamNames[i], orders[i].map(k => makeQ(BANK[k])), false));
             document.getElementById('comp-title').innerText = '🏆 ' + EXAM_LABEL + ' Exam — ' + EXAM_UNITS;
             document.getElementById('comp-time-wrap').style.display = '';
             document.getElementById('btn-stop').innerHTML = '<i class="fas fa-stop"></i> Stop';
@@ -747,7 +763,7 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
             team.el.timerFill.style.width = '0%';
             team.el.doneScore.innerText = 'Score: ' + team.score + ' / ' + team.questions.length;
             team.el.panel.classList.add('finished');
-            if (teams.every(t => t.finished)) endTimeout = setTimeout(endCompetition, 1200);
+            if (teams.every(t => t.finished)) endTimeout = setTimeout(afterRound, 1200);
         }
 
         function mistakesHtml(list) {
@@ -777,32 +793,79 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
             switchScreen('solo-results');
         }
 
+        // Shows a short message on the full-screen overlay, then continues
+        function announce(html, ms, done) {
+            const ov = document.getElementById('countdown');
+            ov.innerHTML = '<div class="announce">' + html + '</div>';
+            ov.classList.add('show');
+            countdownTimer = setTimeout(() => { countdownTimer = null; ov.classList.remove('show'); ov.innerHTML = ''; done(); }, ms);
+        }
+
+        // After both teams finish a round: tie-break if the main round is tied, otherwise show results
+        function afterRound() {
+            endTimeout = null;
+            const [a, b] = teams;
+            if (phase === 'main' && a.score === b.score && tiePool.length) {
+                mainRes = teams.map(t => ({ score: t.score, total: t.questions.length, mistakes: t.mistakes, timeUsed: t.timeUsed }));
+                phase = 'tie';
+                running = false;
+                playSound('tick');
+                announce('🤝 TIE! ' + a.score + ' – ' + b.score + '<small>Tie-break round: ' + tiePool.length + ' more questions</small>', 2600, startTieBreak);
+                return;
+            }
+            endCompetition();
+        }
+
+        function startTieBreak() {
+            const orders = teamOrders(tiePool);
+            arena.innerHTML = '';
+            arena.className = 'arena';
+            teams = [0, 1].map(i => createTeam(i, teamNames[i], orders[i].map(k => makeQ(BANK[k])), false));
+            document.getElementById('comp-title').innerText = '⚡ Tie-break Round — ' + EXAM_LABEL + ' Exam';
+            runCountdown(() => { running = true; teams.forEach(t => loadQuestion(t)); });
+        }
+
         function endCompetition() {
             stopAll();
-            const [a, b] = teams;
-            let winner = null, byTime = false;
-            if (a.score !== b.score) winner = a.score > b.score ? a : b;
-            else if (Math.abs(a.timeUsed - b.timeUsed) >= 100) { winner = a.timeUsed < b.timeUsed ? a : b; byTime = true; }
+            const tie = phase === 'tie' && mainRes;
+            const res = teams.map((t, i) => {
+                const m = tie ? mainRes[i] : { score: t.score, total: t.questions.length, mistakes: t.mistakes, timeUsed: t.timeUsed };
+                return {
+                    idx: t.idx, name: t.name,
+                    main: m.score, mainTotal: m.total,
+                    tb: tie ? t.score : null, tbTotal: tie ? t.questions.length : 0,
+                    time: m.timeUsed + (tie ? t.timeUsed : 0),
+                    mistakes: tie ? m.mistakes.concat(t.mistakes) : m.mistakes
+                };
+            });
+            const [a, b] = res;
+            let winner = null, how = '';
+            if (a.main !== b.main) winner = a.main > b.main ? a : b;
+            else if (tie && a.tb !== b.tb) { winner = a.tb > b.tb ? a : b; how = 'tie'; }
+            else if (Math.abs(a.time - b.time) >= 100) { winner = a.time < b.time ? a : b; how = 'time'; }
 
             const banner = document.getElementById('winner-banner');
+            const note = how === 'tie' ? 'Won in the tie-break round' : how === 'time' ? 'Still equal after the tie-break — won by faster time' : '';
             if (winner) {
                 banner.innerHTML = '🏆 Winner: ' + esc(winner.name) +
-                    (byTime ? '<div style="font-size:1rem;color:#64748b;font-weight:600;margin-top:6px">Same score — won by faster time</div>' : '');
-                lastResultText = 'Winner: ' + winner.name + (byTime ? ' (faster time)' : '');
+                    (note ? '<div style="font-size:1rem;color:#64748b;font-weight:600;margin-top:6px">' + note + '</div>' : '');
+                lastResultText = 'Winner: ' + winner.name + (how === 'tie' ? ' (tie-break round)' : how === 'time' ? ' (faster time)' : '');
                 playSound('win');
             } else {
                 banner.innerHTML = "🤝 It's a Draw!";
                 lastResultText = "It's a draw";
             }
+            lastRes = res;
             const cards = document.getElementById('score-cards');
             cards.innerHTML = '';
-            teams.forEach(t => {
+            res.forEach(t => {
                 const card = document.createElement('div');
                 card.className = 'score-card t' + t.idx + (winner === t ? ' win' : '');
                 card.innerHTML = `
                     <h4>${winner === t ? '🏆 ' : ''}${esc(t.name)}</h4>
-                    <div class="big">${t.score} / ${t.questions.length}</div>
-                    <div class="meta"><i class="fas fa-stopwatch"></i> Time: ${(t.timeUsed / 1000).toFixed(1)}s</div>
+                    <div class="big">${t.main} / ${t.mainTotal}</div>
+                    ${t.tb !== null ? `<div class="meta tb-line"><i class="fas fa-bolt"></i> Tie-break: ${t.tb} / ${t.tbTotal}</div>` : ''}
+                    <div class="meta"><i class="fas fa-stopwatch"></i> Time: ${(t.time / 1000).toFixed(1)}s</div>
                     <div class="results-list">${mistakesHtml(t.mistakes)}</div>`;
                 cards.appendChild(card);
             });
@@ -827,14 +890,14 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
                 ' (' + Math.round(t.score / t.questions.length * 100) + '%)');
         }
 
+        let lastRes = null;
         function sendCompResult() {
-            if (teams.length < 2) return;
+            if (!lastRes) return;
             const cls = val('class-name-input');
-            const [a, b] = teams;
+            const line = (icon, t) => icon + ' ' + t.name + ': ' + t.main + ' / ' + t.mainTotal +
+                (t.tb !== null ? ' | Tie-break: ' + t.tb + ' / ' + t.tbTotal : '') + ' (' + (t.time / 1000).toFixed(1) + 's)\n';
             openWhatsApp('🏆 *Exam Competition Result*\n' + (cls ? '🏫 Class: ' + cls + '\n' : '') + resultHeader() + '\n' +
-                '🔵 ' + a.name + ': ' + a.score + ' / ' + a.questions.length + ' (' + (a.timeUsed / 1000).toFixed(1) + 's)\n' +
-                '🟠 ' + b.name + ': ' + b.score + ' / ' + b.questions.length + ' (' + (b.timeUsed / 1000).toFixed(1) + 's)\n\n' +
-                '🥇 ' + lastResultText);
+                line('🔵', lastRes[0]) + line('🟠', lastRes[1]) + '\n🥇 ' + lastResultText);
         }
 
         setMode('solo');

@@ -327,6 +327,10 @@ body.compact .main-footer { display: none; }
 body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
 
 /* ===== Exam additions ===== */
+.countdown-overlay .announce { font-size: 4.5rem; text-align: center; line-height: 1.2; padding: 0 16px; }
+.countdown-overlay .announce small { display: block; font-size: 1.6rem; color: #fff; font-weight: 700; margin-top: 14px; font-family: 'Poppins', sans-serif; }
+.tb-line { color: #b45309 !important; font-weight: 800 !important; }
+@media (max-width: 768px) { .countdown-overlay .announce { font-size: 2.6rem; } .countdown-overlay .announce small { font-size: 1.15rem; } }
 .team-panel.solo .timer-num, .team-panel.solo .timer-bar { display: block; }
 .team-panel.solo .team-meta { margin-bottom: 6px; }
 .exam-hero { display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin: 6px 0 22px; }
@@ -381,7 +385,7 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
             <h2>Prep 3 English Exam</h2>
             <p>Units 1, 2 & 3 — Term 1</p>
             <div class="exam-hero">
-                <span class="exam-chip"><i class="fas fa-list-ol"></i> 30 questions</span>
+                <span class="exam-chip"><i class="fas fa-list-ol"></i> 40 questions</span>
                 <span class="exam-chip"><i class="fas fa-stopwatch"></i> 30 seconds per question</span>
                 <span class="exam-chip"><i class="fas fa-random"></i> New order every time</span>
             </div>
@@ -405,7 +409,8 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
             <div class="rules" id="comp-rules" style="display:none">
                 <i class="fas fa-stopwatch"></i> 30 seconds for every question.<br>
                 <i class="fas fa-random"></i> Both teams get the same 30 questions, but in a different order.<br>
-                <i class="fas fa-trophy"></i> Highest score wins — if scores are equal, the faster team wins.
+                <i class="fas fa-bolt"></i> If the scores are equal, a tie-break round of 10 more questions decides the winner.<br>
+                <i class="fas fa-trophy"></i> Highest score wins.
             </div>
 
             <button class="btn-start" onclick="startExam()"><i class="fas fa-play"></i> Start the Exam</button>
@@ -498,8 +503,9 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
 
         const EXAM_LABEL = "Prep 3";
         const EXAM_UNITS = "Units 1, 2 & 3";
-        const BANK = [{"unit": 1, "text": "Many students feel stressed before important exams. The antonym of \"stressed\" is \"_____\".", "ans": "relaxed", "wrong": ["worried", "nervous", "tired"]}, {"unit": 1, "text": "_____ is where someone comes from.", "ans": "Background", "wrong": ["Identity", "Self-discovery", "Value"]}, {"unit": 1, "text": "The coach's _____ message made the players feel confident before the match.", "ans": "inspiring", "wrong": ["confusing", "volunteering", "learning"]}, {"unit": 1, "text": "My cousin is very outgoing and loves meeting new people. \"Outgoing\" is a synonym of \"_____\".", "ans": "sociable", "wrong": ["shy", "introvert", "nervous"]}, {"unit": 1, "text": "At first, Omar found it difficult to blend _____ his new school.", "ans": "into", "wrong": ["from", "of", "about"]}, {"unit": 1, "text": "Students should always show respect _____ their teachers and classmates.", "ans": "for", "wrong": ["with", "on", "at"]}, {"unit": 1, "text": "Ms. Hanan explained that Nour's unique traits weren't weaknesses; being different was her greatest _____.", "ans": "strength", "wrong": ["mistake", "fear", "habit"]}, {"unit": 1, "text": "Aya _____ sushi before.", "ans": "has never eaten", "wrong": ["never eat", "has never ate", "have never eaten"]}, {"unit": 1, "text": "This book _____ by millions of people.", "ans": "has been read", "wrong": ["has read", "have been read", "has been reads"]}, {"unit": 1, "text": "Medo has played football _____ five years.", "ans": "for", "wrong": ["since", "ago", "in"]}, {"unit": 2, "text": "Pollution is a serious problem that affects the environment. The opposite of \"serious\" is \"_____\".", "ans": "safe", "wrong": ["dangerous", "important", "harmful"]}, {"unit": 2, "text": "My sibling always helps me with my homework. The word \"sibling\" means \"_____\".", "ans": "brother or sister", "wrong": ["friend", "neighbor", "cousin"]}, {"unit": 2, "text": "Although my cousin lives abroad, we stay _____ touch by video calls every week.", "ans": "in", "wrong": ["on", "to", "with"]}, {"unit": 2, "text": "Modern technology helps people communicate with distant friends easily. \"Distant\" is a synonym of \"_____\".", "ans": "remote", "wrong": ["nearby", "close", "local"]}, {"unit": 2, "text": "Sara didn't practice well, so she looked _____ during her first speech in front of the class.", "ans": "awkward", "wrong": ["cheerful", "confident", "relaxed"]}, {"unit": 2, "text": "Add the prefix \"_____\" to \"connect\" to mean \"do something again\".", "ans": "re-", "wrong": ["im-", "il-", "dis-"]}, {"unit": 2, "text": "The two brothers had a/an _____ over a toy.", "ans": "fight", "wrong": ["interest", "courage", "investment"]}, {"unit": 2, "text": "Being honest and supportive helps _____ the bond between people.", "ans": "strengthen", "wrong": ["weaken", "break", "reduce"]}, {"unit": 2, "text": "If Farida had studied more, she _____ the exam easily.", "ans": "would have passed", "wrong": ["would pass", "will pass", "had passed"]}, {"unit": 2, "text": "Choose the correct sentence: (Maya didn't wake up early, so she missed the school bus. → If)", "ans": "If Maya had woken up early, she wouldn't have missed the school bus.", "wrong": ["If Maya woke up early, she wouldn't miss the school bus.", "If Maya had woken up early, she would have missed the school bus.", "If Maya hadn't woken up early, she wouldn't have missed the school bus."]}, {"unit": 3, "text": "The robot can _____ quickly when someone gives it a command.", "ans": "respond", "wrong": ["control", "develop", "replace"]}, {"unit": 3, "text": "My parents set time _____ for using the computer.", "ans": "limits", "wrong": ["points", "tasks", "humans"]}, {"unit": 3, "text": "AI systems cannot make decisions on their own. They follow instructions. The antonym of \"follow\" is _____.", "ans": "ignore", "wrong": ["obey", "continue", "repeat"]}, {"unit": 3, "text": "To _____ is to change something to make it the way you want.", "ans": "customize", "wrong": ["deliver", "borrow", "protect"]}, {"unit": 3, "text": "I got an instant reply to my email. To form the adverb of \"instant\", add the suffix \"_____\".", "ans": "-ly", "wrong": ["-ed", "-y", "-ion"]}, {"unit": 3, "text": "I will definitely visit my grandparents this weekend. \"Definitely\" means _____.", "ans": "certainly", "wrong": ["probably", "quietly", "sadly"]}, {"unit": 3, "text": "I couldn't _____ my old friend after so many years had passed.", "ans": "recognize", "wrong": ["develop", "assist", "realize"]}, {"unit": 3, "text": "Have you heard _____ the accident?", "ans": "about", "wrong": ["on", "from", "at"]}, {"unit": 3, "text": "The homework _____ by the teacher tomorrow.", "ans": "will be checked", "wrong": ["will check", "will checked", "is checking"]}, {"unit": 3, "text": "Choose the correct sentence: (The police will catch the thief very soon. → The thief)", "ans": "The thief will be caught by the police very soon.", "wrong": ["The thief will be catch by the police very soon.", "The thief will caught by the police very soon.", "The thief will be catching by the police very soon."]}];
+        const BANK = [{"unit": 1, "text": "Many students feel stressed before important exams. The antonym of \"stressed\" is \"_____\".", "ans": "relaxed", "wrong": ["worried", "nervous", "tired"]}, {"unit": 1, "text": "_____ is where someone comes from.", "ans": "Background", "wrong": ["Identity", "Self-discovery", "Value"]}, {"unit": 1, "text": "The coach's _____ message made the players feel confident before the match.", "ans": "inspiring", "wrong": ["confusing", "volunteering", "learning"]}, {"unit": 1, "text": "My cousin is very outgoing and loves meeting new people. \"Outgoing\" is a synonym of \"_____\".", "ans": "sociable", "wrong": ["shy", "introvert", "nervous"]}, {"unit": 1, "text": "At first, Omar found it difficult to blend _____ his new school.", "ans": "into", "wrong": ["from", "of", "about"]}, {"unit": 1, "text": "Students should always show respect _____ their teachers and classmates.", "ans": "for", "wrong": ["with", "on", "at"]}, {"unit": 1, "text": "Ms. Hanan explained that Nour's unique traits weren't weaknesses; being different was her greatest _____.", "ans": "strength", "wrong": ["mistake", "fear", "habit"]}, {"unit": 1, "text": "Aya _____ sushi before.", "ans": "has never eaten", "wrong": ["never eat", "has never ate", "have never eaten"]}, {"unit": 1, "text": "This book _____ by millions of people.", "ans": "has been read", "wrong": ["has read", "have been read", "has been reads"]}, {"unit": 1, "text": "Medo has played football _____ five years.", "ans": "for", "wrong": ["since", "ago", "in"]}, {"unit": 2, "text": "Pollution is a serious problem that affects the environment. The opposite of \"serious\" is \"_____\".", "ans": "safe", "wrong": ["dangerous", "important", "harmful"]}, {"unit": 2, "text": "My sibling always helps me with my homework. The word \"sibling\" means \"_____\".", "ans": "brother or sister", "wrong": ["friend", "neighbor", "cousin"]}, {"unit": 2, "text": "Although my cousin lives abroad, we stay _____ touch by video calls every week.", "ans": "in", "wrong": ["on", "to", "with"]}, {"unit": 2, "text": "Modern technology helps people communicate with distant friends easily. \"Distant\" is a synonym of \"_____\".", "ans": "remote", "wrong": ["nearby", "close", "local"]}, {"unit": 2, "text": "Sara didn't practice well, so she looked _____ during her first speech in front of the class.", "ans": "awkward", "wrong": ["cheerful", "confident", "relaxed"]}, {"unit": 2, "text": "Add the prefix \"_____\" to \"connect\" to mean \"do something again\".", "ans": "re-", "wrong": ["im-", "il-", "dis-"]}, {"unit": 2, "text": "The two brothers had a/an _____ over a toy.", "ans": "fight", "wrong": ["interest", "courage", "investment"]}, {"unit": 2, "text": "Being honest and supportive helps _____ the bond between people.", "ans": "strengthen", "wrong": ["weaken", "break", "reduce"]}, {"unit": 2, "text": "If Farida had studied more, she _____ the exam easily.", "ans": "would have passed", "wrong": ["would pass", "will pass", "had passed"]}, {"unit": 2, "text": "Choose the correct sentence: (Maya didn't wake up early, so she missed the school bus. → If)", "ans": "If Maya had woken up early, she wouldn't have missed the school bus.", "wrong": ["If Maya woke up early, she wouldn't miss the school bus.", "If Maya had woken up early, she would have missed the school bus.", "If Maya hadn't woken up early, she wouldn't have missed the school bus."]}, {"unit": 3, "text": "The robot can _____ quickly when someone gives it a command.", "ans": "respond", "wrong": ["control", "develop", "replace"]}, {"unit": 3, "text": "My parents set time _____ for using the computer.", "ans": "limits", "wrong": ["points", "tasks", "humans"]}, {"unit": 3, "text": "AI systems cannot make decisions on their own. They follow instructions. The antonym of \"follow\" is _____.", "ans": "ignore", "wrong": ["obey", "continue", "repeat"]}, {"unit": 3, "text": "To _____ is to change something to make it the way you want.", "ans": "customize", "wrong": ["deliver", "borrow", "protect"]}, {"unit": 3, "text": "I got an instant reply to my email. To form the adverb of \"instant\", add the suffix \"_____\".", "ans": "-ly", "wrong": ["-ed", "-y", "-ion"]}, {"unit": 3, "text": "I will definitely visit my grandparents this weekend. \"Definitely\" means _____.", "ans": "certainly", "wrong": ["probably", "quietly", "sadly"]}, {"unit": 3, "text": "I couldn't _____ my old friend after so many years had passed.", "ans": "recognize", "wrong": ["develop", "assist", "realize"]}, {"unit": 3, "text": "Have you heard _____ the accident?", "ans": "about", "wrong": ["on", "from", "at"]}, {"unit": 3, "text": "The homework _____ by the teacher tomorrow.", "ans": "will be checked", "wrong": ["will check", "will checked", "is checking"]}, {"unit": 3, "text": "Choose the correct sentence: (The police will catch the thief very soon. → The thief)", "ans": "The thief will be caught by the police very soon.", "wrong": ["The thief will be catch by the police very soon.", "The thief will caught by the police very soon.", "The thief will be catching by the police very soon."]}, {"unit": 1, "text": "Zeina took personal responsibility for the garden project. To change the adjective \"personal\" into a noun, we add the suffix _____.", "ans": "-ity", "wrong": ["-ion", "-ation", "-ness"]}, {"unit": 1, "text": "It is three years since my brother last _____ abroad.", "ans": "traveled", "wrong": ["has traveled", "travels", "had traveled"]}, {"unit": 1, "text": "I'm afraid you can't talk to Mr. Sameh. He _____ out.", "ans": "has just gone", "wrong": ["has just went", "had just gone", "have just gone"]}, {"unit": 1, "text": "This is the first time they _____ in a helicopter.", "ans": "have ever flown", "wrong": ["ever flew", "had ever flown", "have ever flew"]}, {"unit": 1, "text": "Choose the correct sentence: (I haven't heard from Tarek since we finished school. → The last time)", "ans": "The last time I heard from Tarek was when we finished school.", "wrong": ["The last time I have heard from Tarek was when we finished school.", "The last time I heard from Tarek since we finished school.", "The last time I didn't hear from Tarek was when we finished school."]}, {"unit": 2, "text": "If I _____ more time yesterday, I would have visited my grandparents.", "ans": "had had", "wrong": ["have had", "had", "would have"]}, {"unit": 2, "text": "What _____ if you had missed the final flight home?", "ans": "would you have done", "wrong": ["would you do", "will you do", "had you done"]}, {"unit": 2, "text": "If we had saved enough money, we _____ that laptop last year.", "ans": "could have bought", "wrong": ["can buy", "could buy", "could have buy"]}, {"unit": 3, "text": "The broken computer _____ until next Monday.", "ans": "will not be repaired", "wrong": ["will not repair", "will not repaired", "is not repairing"]}, {"unit": 3, "text": "Students can _____ useful skills from teamwork projects.", "ans": "gain", "wrong": ["win", "beat", "lose"]}];
         const TEACHER_PHONE = '201099151531';
+        const MAIN_COUNT = 30;             // questions in the main competition round (rest = tie-break round)
         const COMP_TIME = 30;              // seconds per question (solo and team competition)
 
         let mode = 'solo';
@@ -510,6 +516,10 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
         let countdownTimer = null;
         let endTimeout = null;
         let lastResultText = '';
+        let phase = 'main';                // 'main' or 'tie'
+        let tiePool = [];                  // question indexes kept for the tie-break round
+        let mainRes = null;                // main-round results saved when a tie-break starts
+        let teamNames = ['Team A', 'Team B'];
 
         const screens = document.querySelectorAll('.screen');
         const arena = document.getElementById('arena');
@@ -565,8 +575,9 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
         }
 
         // Same questions for both teams, but never in the same order
-        function teamOrders() {
-            const a = freshOrder();
+        // Same questions for both teams, but never in the same order
+        function teamOrders(pool) {
+            const a = shuffle(pool);
             let b;
             do { b = shuffle(a); } while (a.length > 1 && (b[0] === a[0] || b.every((v, i) => v === a[i])));
             return [a, b];
@@ -642,10 +653,15 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
             }
 
             questionTime = COMP_TIME;
-            const names = [val('team1-name') || 'Team A', val('team2-name') || 'Team B'];
-            const orders = teamOrders();
+            teamNames = [val('team1-name') || 'Team A', val('team2-name') || 'Team B'];
+            const all = freshOrder();
+            const main = all.slice(0, MAIN_COUNT);
+            tiePool = all.slice(MAIN_COUNT);
+            phase = 'main';
+            mainRes = null;
+            const orders = teamOrders(main);
             arena.className = 'arena';
-            teams = [0, 1].map(i => createTeam(i, names[i], orders[i].map(k => makeQ(BANK[k])), false));
+            teams = [0, 1].map(i => createTeam(i, teamNames[i], orders[i].map(k => makeQ(BANK[k])), false));
             document.getElementById('comp-title').innerText = '🏆 ' + EXAM_LABEL + ' Exam — ' + EXAM_UNITS;
             document.getElementById('comp-time-wrap').style.display = '';
             document.getElementById('btn-stop').innerHTML = '<i class="fas fa-stop"></i> Stop';
@@ -747,7 +763,7 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
             team.el.timerFill.style.width = '0%';
             team.el.doneScore.innerText = 'Score: ' + team.score + ' / ' + team.questions.length;
             team.el.panel.classList.add('finished');
-            if (teams.every(t => t.finished)) endTimeout = setTimeout(endCompetition, 1200);
+            if (teams.every(t => t.finished)) endTimeout = setTimeout(afterRound, 1200);
         }
 
         function mistakesHtml(list) {
@@ -777,32 +793,79 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
             switchScreen('solo-results');
         }
 
+        // Shows a short message on the full-screen overlay, then continues
+        function announce(html, ms, done) {
+            const ov = document.getElementById('countdown');
+            ov.innerHTML = '<div class="announce">' + html + '</div>';
+            ov.classList.add('show');
+            countdownTimer = setTimeout(() => { countdownTimer = null; ov.classList.remove('show'); ov.innerHTML = ''; done(); }, ms);
+        }
+
+        // After both teams finish a round: tie-break if the main round is tied, otherwise show results
+        function afterRound() {
+            endTimeout = null;
+            const [a, b] = teams;
+            if (phase === 'main' && a.score === b.score && tiePool.length) {
+                mainRes = teams.map(t => ({ score: t.score, total: t.questions.length, mistakes: t.mistakes, timeUsed: t.timeUsed }));
+                phase = 'tie';
+                running = false;
+                playSound('tick');
+                announce('🤝 TIE! ' + a.score + ' – ' + b.score + '<small>Tie-break round: ' + tiePool.length + ' more questions</small>', 2600, startTieBreak);
+                return;
+            }
+            endCompetition();
+        }
+
+        function startTieBreak() {
+            const orders = teamOrders(tiePool);
+            arena.innerHTML = '';
+            arena.className = 'arena';
+            teams = [0, 1].map(i => createTeam(i, teamNames[i], orders[i].map(k => makeQ(BANK[k])), false));
+            document.getElementById('comp-title').innerText = '⚡ Tie-break Round — ' + EXAM_LABEL + ' Exam';
+            runCountdown(() => { running = true; teams.forEach(t => loadQuestion(t)); });
+        }
+
         function endCompetition() {
             stopAll();
-            const [a, b] = teams;
-            let winner = null, byTime = false;
-            if (a.score !== b.score) winner = a.score > b.score ? a : b;
-            else if (Math.abs(a.timeUsed - b.timeUsed) >= 100) { winner = a.timeUsed < b.timeUsed ? a : b; byTime = true; }
+            const tie = phase === 'tie' && mainRes;
+            const res = teams.map((t, i) => {
+                const m = tie ? mainRes[i] : { score: t.score, total: t.questions.length, mistakes: t.mistakes, timeUsed: t.timeUsed };
+                return {
+                    idx: t.idx, name: t.name,
+                    main: m.score, mainTotal: m.total,
+                    tb: tie ? t.score : null, tbTotal: tie ? t.questions.length : 0,
+                    time: m.timeUsed + (tie ? t.timeUsed : 0),
+                    mistakes: tie ? m.mistakes.concat(t.mistakes) : m.mistakes
+                };
+            });
+            const [a, b] = res;
+            let winner = null, how = '';
+            if (a.main !== b.main) winner = a.main > b.main ? a : b;
+            else if (tie && a.tb !== b.tb) { winner = a.tb > b.tb ? a : b; how = 'tie'; }
+            else if (Math.abs(a.time - b.time) >= 100) { winner = a.time < b.time ? a : b; how = 'time'; }
 
             const banner = document.getElementById('winner-banner');
+            const note = how === 'tie' ? 'Won in the tie-break round' : how === 'time' ? 'Still equal after the tie-break — won by faster time' : '';
             if (winner) {
                 banner.innerHTML = '🏆 Winner: ' + esc(winner.name) +
-                    (byTime ? '<div style="font-size:1rem;color:#64748b;font-weight:600;margin-top:6px">Same score — won by faster time</div>' : '');
-                lastResultText = 'Winner: ' + winner.name + (byTime ? ' (faster time)' : '');
+                    (note ? '<div style="font-size:1rem;color:#64748b;font-weight:600;margin-top:6px">' + note + '</div>' : '');
+                lastResultText = 'Winner: ' + winner.name + (how === 'tie' ? ' (tie-break round)' : how === 'time' ? ' (faster time)' : '');
                 playSound('win');
             } else {
                 banner.innerHTML = "🤝 It's a Draw!";
                 lastResultText = "It's a draw";
             }
+            lastRes = res;
             const cards = document.getElementById('score-cards');
             cards.innerHTML = '';
-            teams.forEach(t => {
+            res.forEach(t => {
                 const card = document.createElement('div');
                 card.className = 'score-card t' + t.idx + (winner === t ? ' win' : '');
                 card.innerHTML = `
                     <h4>${winner === t ? '🏆 ' : ''}${esc(t.name)}</h4>
-                    <div class="big">${t.score} / ${t.questions.length}</div>
-                    <div class="meta"><i class="fas fa-stopwatch"></i> Time: ${(t.timeUsed / 1000).toFixed(1)}s</div>
+                    <div class="big">${t.main} / ${t.mainTotal}</div>
+                    ${t.tb !== null ? `<div class="meta tb-line"><i class="fas fa-bolt"></i> Tie-break: ${t.tb} / ${t.tbTotal}</div>` : ''}
+                    <div class="meta"><i class="fas fa-stopwatch"></i> Time: ${(t.time / 1000).toFixed(1)}s</div>
                     <div class="results-list">${mistakesHtml(t.mistakes)}</div>`;
                 cards.appendChild(card);
             });
@@ -827,14 +890,14 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
                 ' (' + Math.round(t.score / t.questions.length * 100) + '%)');
         }
 
+        let lastRes = null;
         function sendCompResult() {
-            if (teams.length < 2) return;
+            if (!lastRes) return;
             const cls = val('class-name-input');
-            const [a, b] = teams;
+            const line = (icon, t) => icon + ' ' + t.name + ': ' + t.main + ' / ' + t.mainTotal +
+                (t.tb !== null ? ' | Tie-break: ' + t.tb + ' / ' + t.tbTotal : '') + ' (' + (t.time / 1000).toFixed(1) + 's)\n';
             openWhatsApp('🏆 *Exam Competition Result*\n' + (cls ? '🏫 Class: ' + cls + '\n' : '') + resultHeader() + '\n' +
-                '🔵 ' + a.name + ': ' + a.score + ' / ' + a.questions.length + ' (' + (a.timeUsed / 1000).toFixed(1) + 's)\n' +
-                '🟠 ' + b.name + ': ' + b.score + ' / ' + b.questions.length + ' (' + (b.timeUsed / 1000).toFixed(1) + 's)\n\n' +
-                '🥇 ' + lastResultText);
+                line('🔵', lastRes[0]) + line('🟠', lastRes[1]) + '\n🥇 ' + lastResultText);
         }
 
         setMode('solo');

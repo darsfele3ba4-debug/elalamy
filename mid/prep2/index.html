@@ -327,6 +327,10 @@ body.compact .main-footer { display: none; }
 body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
 
 /* ===== Exam additions ===== */
+.countdown-overlay .announce { font-size: 4.5rem; text-align: center; line-height: 1.2; padding: 0 16px; }
+.countdown-overlay .announce small { display: block; font-size: 1.6rem; color: #fff; font-weight: 700; margin-top: 14px; font-family: 'Poppins', sans-serif; }
+.tb-line { color: #b45309 !important; font-weight: 800 !important; }
+@media (max-width: 768px) { .countdown-overlay .announce { font-size: 2.6rem; } .countdown-overlay .announce small { font-size: 1.15rem; } }
 .team-panel.solo .timer-num, .team-panel.solo .timer-bar { display: block; }
 .team-panel.solo .team-meta { margin-bottom: 6px; }
 .exam-hero { display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin: 6px 0 22px; }
@@ -381,7 +385,7 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
             <h2>Prep 2 English Exam</h2>
             <p>Units 1, 2 & 3 — Term 1</p>
             <div class="exam-hero">
-                <span class="exam-chip"><i class="fas fa-list-ol"></i> 30 questions</span>
+                <span class="exam-chip"><i class="fas fa-list-ol"></i> 40 questions</span>
                 <span class="exam-chip"><i class="fas fa-stopwatch"></i> 30 seconds per question</span>
                 <span class="exam-chip"><i class="fas fa-random"></i> New order every time</span>
             </div>
@@ -405,7 +409,8 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
             <div class="rules" id="comp-rules" style="display:none">
                 <i class="fas fa-stopwatch"></i> 30 seconds for every question.<br>
                 <i class="fas fa-random"></i> Both teams get the same 30 questions, but in a different order.<br>
-                <i class="fas fa-trophy"></i> Highest score wins — if scores are equal, the faster team wins.
+                <i class="fas fa-bolt"></i> If the scores are equal, a tie-break round of 10 more questions decides the winner.<br>
+                <i class="fas fa-trophy"></i> Highest score wins.
             </div>
 
             <button class="btn-start" onclick="startExam()"><i class="fas fa-play"></i> Start the Exam</button>
@@ -498,8 +503,9 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
 
         const EXAM_LABEL = "Prep 2";
         const EXAM_UNITS = "Units 1, 2 & 3";
-        const BANK = [{"unit": 1, "text": "The new mobile application helps us to _____ with other people who live in very far countries.", "ans": "communicate", "wrong": ["calculate", "congratulate", "concentrate"]}, {"unit": 1, "text": "Some young people spend most of their time looking at screens, so they really need to _____ their usage of the internet.", "ans": "limit", "wrong": ["link", "look", "love"]}, {"unit": 1, "text": "To be a _____ person, you should think of new ideas and build unique digital content.", "ans": "creative", "wrong": ["expensive", "negative", "passive"]}, {"unit": 1, "text": "The information about digital natives is powerful. The synonym of \"powerful\" is \"_____\".", "ans": "strong", "wrong": ["useless", "weak", "hopeful"]}, {"unit": 1, "text": "My brother usually feels _____ out when he cannot play online games with his friends in the evening.", "ans": "left", "wrong": ["found", "looked", "turned"]}, {"unit": 1, "text": "It is very important to _____ your emotions before you write or post anything on social media websites.", "ans": "control", "wrong": ["post", "research", "agree"]}, {"unit": 1, "text": "Do you agree _____ your friend about the best way to spend the coming summer holiday?", "ans": "with", "wrong": ["on", "for", "at"]}, {"unit": 1, "text": "A situation in which different things are of equal weight or amount is \"_____\".", "ans": "balance", "wrong": ["generation", "identity", "screen time"]}, {"unit": 1, "text": "Choose the correct sentence: (My dad arranges to fly to London next month.)", "ans": "My dad is flying to London next month.", "wrong": ["My dad is fly to London next month.", "My dad is flies to London next month.", "My dad is flew to London next month."]}, {"unit": 1, "text": "Choose the correct sentence:", "ans": "I want a glass of water right now.", "wrong": ["I am wanting a glass of water right now.", "I wanting a glass of water right now.", "I wants a glass of water right now."]}, {"unit": 2, "text": "A secret word or phrase that you use to access your personal information is a _____.", "ans": "password", "wrong": ["setting", "trace", "data"]}, {"unit": 2, "text": "When you use the internet, keep your information secure. The antonym of \"secure\" is \"_____\".", "ans": "risky", "wrong": ["private", "trusted", "protected"]}, {"unit": 2, "text": "To change the verb \"act\" into a noun that means a thing you do, we add the suffix \"_____\".", "ans": "-ion", "wrong": ["-er", "-ian", "-ly"]}, {"unit": 2, "text": "The word \"complex\" means difficult to understand, so its antonym is \"_____\".", "ans": "simple", "wrong": ["permanent", "scary", "active"]}, {"unit": 2, "text": "The knowledge or skill that you get from doing things over time is your _____.", "ans": "experience", "wrong": ["danger", "mark", "setting"]}, {"unit": 2, "text": "My trusted _____ always guides me to stay safe and helps me when I have a problem online.", "ans": "guardian", "wrong": ["stranger", "account", "symbol"]}, {"unit": 2, "text": "It is completely _____ to share your personal information with people you do not know.", "ans": "unsafe", "wrong": ["respectful", "protected", "strong"]}, {"unit": 2, "text": "Every time you visit a website, you leave a _____ behind, so be careful.", "ans": "trace", "wrong": ["privacy", "update", "address"]}, {"unit": 2, "text": "Choose the correct sentence: (People share data on social media. → Data)", "ans": "Data is shared on social media.", "wrong": ["Data shares on social media.", "Data is share on social media.", "Data is sharing on social media."]}, {"unit": 2, "text": "Choose the correct sentence: (Adel can fix the software. → be)", "ans": "The software can be fixed by Adel.", "wrong": ["The software can be fix by Adel.", "The software can fixed by Adel.", "The software can is fixed by Adel."]}, {"unit": 3, "text": "Nader felt very discouraged after the quiz. The synonym of \"discouraged\" is \"_____\".", "ans": "disappointed", "wrong": ["brave", "perfect", "glad"]}, {"unit": 3, "text": "\"Not giving up easily\" is the definition of _____.", "ans": "determination", "wrong": ["attitude", "obstacle", "crowd"]}, {"unit": 3, "text": "They _____ for the long race yesterday.", "ans": "trained", "wrong": ["are training", "trains", "train"]}, {"unit": 3, "text": "He was very scared in the dark. The antonym of \"scared\" is \"_____\".", "ans": "brave", "wrong": ["upset", "confused", "weak"]}, {"unit": 3, "text": "You should stay calm and try to _____ the difficult challenge.", "ans": "handle", "wrong": ["relax", "surprise", "quit"]}, {"unit": 3, "text": "Building a new _____ will help people pass over the busy highway easily.", "ans": "flyover", "wrong": ["tunnel", "monorail", "attitude"]}, {"unit": 3, "text": "Yesterday, my father was on the highway when he got stuck in a bad _____.", "ans": "traffic jam", "wrong": ["tunnel", "monorail", "stress"]}, {"unit": 3, "text": "Mr. Said is a role model because he always shows _____.", "ans": "honesty", "wrong": ["crowd", "knee", "medal"]}, {"unit": 3, "text": "Choose the correct sentence: (She crossed the highway. She noticed the bump. → While)", "ans": "While she was crossing the highway, she noticed the bump.", "wrong": ["While she crossed the highway, she was noticing the bump.", "While she was cross the highway, she noticed the bump.", "While she is crossing the highway, she noticed the bump."]}, {"unit": 3, "text": "He was doing his homework _____ the doorbell rang.", "ans": "when", "wrong": ["while", "during", "since"]}];
+        const BANK = [{"unit": 1, "text": "The new mobile application helps us to _____ with other people who live in very far countries.", "ans": "communicate", "wrong": ["calculate", "congratulate", "concentrate"]}, {"unit": 1, "text": "Some young people spend most of their time looking at screens, so they really need to _____ their usage of the internet.", "ans": "limit", "wrong": ["link", "look", "love"]}, {"unit": 1, "text": "To be a _____ person, you should think of new ideas and build unique digital content.", "ans": "creative", "wrong": ["expensive", "negative", "passive"]}, {"unit": 1, "text": "The information about digital natives is powerful. The synonym of \"powerful\" is \"_____\".", "ans": "strong", "wrong": ["useless", "weak", "hopeful"]}, {"unit": 1, "text": "My brother usually feels _____ out when he cannot play online games with his friends in the evening.", "ans": "left", "wrong": ["found", "looked", "turned"]}, {"unit": 1, "text": "It is very important to _____ your emotions before you write or post anything on social media websites.", "ans": "control", "wrong": ["post", "research", "agree"]}, {"unit": 1, "text": "Do you agree _____ your friend about the best way to spend the coming summer holiday?", "ans": "with", "wrong": ["on", "for", "at"]}, {"unit": 1, "text": "A situation in which different things are of equal weight or amount is \"_____\".", "ans": "balance", "wrong": ["generation", "identity", "screen time"]}, {"unit": 1, "text": "Choose the correct sentence: (My dad arranges to fly to London next month.)", "ans": "My dad is flying to London next month.", "wrong": ["My dad is fly to London next month.", "My dad is flies to London next month.", "My dad is flew to London next month."]}, {"unit": 1, "text": "Choose the correct sentence:", "ans": "I want a glass of water right now.", "wrong": ["I am wanting a glass of water right now.", "I wanting a glass of water right now.", "I wants a glass of water right now."]}, {"unit": 2, "text": "A secret word or phrase that you use to access your personal information is a _____.", "ans": "password", "wrong": ["setting", "trace", "data"]}, {"unit": 2, "text": "When you use the internet, keep your information secure. The antonym of \"secure\" is \"_____\".", "ans": "risky", "wrong": ["private", "trusted", "protected"]}, {"unit": 2, "text": "To change the verb \"act\" into a noun that means a thing you do, we add the suffix \"_____\".", "ans": "-ion", "wrong": ["-er", "-ian", "-ly"]}, {"unit": 2, "text": "The word \"complex\" means difficult to understand, so its antonym is \"_____\".", "ans": "simple", "wrong": ["permanent", "scary", "active"]}, {"unit": 2, "text": "The knowledge or skill that you get from doing things over time is your _____.", "ans": "experience", "wrong": ["danger", "mark", "setting"]}, {"unit": 2, "text": "My trusted _____ always guides me to stay safe and helps me when I have a problem online.", "ans": "guardian", "wrong": ["stranger", "account", "symbol"]}, {"unit": 2, "text": "It is completely _____ to share your personal information with people you do not know.", "ans": "unsafe", "wrong": ["respectful", "protected", "strong"]}, {"unit": 2, "text": "Every time you visit a website, you leave a _____ behind, so be careful.", "ans": "trace", "wrong": ["privacy", "update", "address"]}, {"unit": 2, "text": "Choose the correct sentence: (People share data on social media. → Data)", "ans": "Data is shared on social media.", "wrong": ["Data shares on social media.", "Data is share on social media.", "Data is sharing on social media."]}, {"unit": 2, "text": "Choose the correct sentence: (Adel can fix the software. → be)", "ans": "The software can be fixed by Adel.", "wrong": ["The software can be fix by Adel.", "The software can fixed by Adel.", "The software can is fixed by Adel."]}, {"unit": 3, "text": "Nader felt very discouraged after the quiz. The synonym of \"discouraged\" is \"_____\".", "ans": "disappointed", "wrong": ["brave", "perfect", "glad"]}, {"unit": 3, "text": "\"Not giving up easily\" is the definition of _____.", "ans": "determination", "wrong": ["attitude", "obstacle", "crowd"]}, {"unit": 3, "text": "They _____ for the long race yesterday.", "ans": "trained", "wrong": ["are training", "trains", "train"]}, {"unit": 3, "text": "He was very scared in the dark. The antonym of \"scared\" is \"_____\".", "ans": "brave", "wrong": ["upset", "confused", "weak"]}, {"unit": 3, "text": "You should stay calm and try to _____ the difficult challenge.", "ans": "handle", "wrong": ["relax", "surprise", "quit"]}, {"unit": 3, "text": "Building a new _____ will help people pass over the busy highway easily.", "ans": "flyover", "wrong": ["tunnel", "monorail", "attitude"]}, {"unit": 3, "text": "Yesterday, my father was on the highway when he got stuck in a bad _____.", "ans": "traffic jam", "wrong": ["tunnel", "monorail", "stress"]}, {"unit": 3, "text": "Mr. Said is a role model because he always shows _____.", "ans": "honesty", "wrong": ["crowd", "knee", "medal"]}, {"unit": 3, "text": "Choose the correct sentence: (She crossed the highway. She noticed the bump. → While)", "ans": "While she was crossing the highway, she noticed the bump.", "wrong": ["While she crossed the highway, she was noticing the bump.", "While she was cross the highway, she noticed the bump.", "While she is crossing the highway, she noticed the bump."]}, {"unit": 3, "text": "He was doing his homework _____ the doorbell rang.", "ans": "when", "wrong": ["while", "during", "since"]}, {"unit": 1, "text": "Choose the correct sentence: (Tamer watches TV in the evening. → this evening)", "ans": "Tamer is watching TV this evening.", "wrong": ["Tamer was watching TV this evening.", "Tamer is watch TV this evening.", "Tamer watching TV this evening."]}, {"unit": 1, "text": "Choose the correct sentence: (Does she ask where the library is? → asking)", "ans": "Is she asking where the library is?", "wrong": ["Does she asking where the library is?", "Is she asking where is the library?", "Is she ask where the library is?"]}, {"unit": 1, "text": "Choose the correct sentence: (Why do you use your laptop? → at the moment)", "ans": "Why are you using your laptop at the moment?", "wrong": ["Why do you using your laptop at the moment?", "Why you are using your laptop at the moment?", "Why are you use your laptop at the moment?"]}, {"unit": 1, "text": "Technology can help to _____ people from different global places.", "ans": "unite", "wrong": ["discover", "express", "guide"]}, {"unit": 2, "text": "Choose the correct sentence: (People post private data online every day. → Private data)", "ans": "Private data is posted online every day.", "wrong": ["Private data posts online every day.", "Private data is posting online every day.", "Private data are post online every day."]}, {"unit": 2, "text": "Choose the correct sentence: (Does the guardian allow the child to use the internet? → Is)", "ans": "Is the child allowed to use the internet?", "wrong": ["Is the child allow to use the internet?", "Is the guardian allowed the child to use the internet?", "Is the child allowing to use the internet?"]}, {"unit": 2, "text": "Choose the correct sentence: (We can protect our digital footprint if we follow rules. → are followed)", "ans": "We can protect our digital footprint if rules are followed.", "wrong": ["We can protect our digital footprint if rules are follow.", "We can protect our digital footprint if rules follow.", "We can protect our digital footprint if rules are following."]}, {"unit": 2, "text": "I always _____ the important rules and tips to keep my digital footprint secure.", "ans": "follow", "wrong": ["remove", "guess", "explain"]}, {"unit": 3, "text": "Choose the correct sentence: (During my run, I noticed a bump. → While)", "ans": "While I was running, I noticed a bump.", "wrong": ["While I ran, I was noticing a bump.", "While I was run, I noticed a bump.", "While I running, I noticed a bump."]}, {"unit": 3, "text": "Choose the correct sentence: (I was training. My sister was relaxing. → While)", "ans": "While I was training, my sister was relaxing.", "wrong": ["While I training, my sister was relaxing.", "While I was trained, my sister was relaxing.", "While I am training, my sister was relaxing."]}];
         const TEACHER_PHONE = '201099151531';
+        const MAIN_COUNT = 30;             // questions in the main competition round (rest = tie-break round)
         const COMP_TIME = 30;              // seconds per question (solo and team competition)
 
         let mode = 'solo';
@@ -510,6 +516,10 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
         let countdownTimer = null;
         let endTimeout = null;
         let lastResultText = '';
+        let phase = 'main';                // 'main' or 'tie'
+        let tiePool = [];                  // question indexes kept for the tie-break round
+        let mainRes = null;                // main-round results saved when a tie-break starts
+        let teamNames = ['Team A', 'Team B'];
 
         const screens = document.querySelectorAll('.screen');
         const arena = document.getElementById('arena');
@@ -565,8 +575,9 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
         }
 
         // Same questions for both teams, but never in the same order
-        function teamOrders() {
-            const a = freshOrder();
+        // Same questions for both teams, but never in the same order
+        function teamOrders(pool) {
+            const a = shuffle(pool);
             let b;
             do { b = shuffle(a); } while (a.length > 1 && (b[0] === a[0] || b.every((v, i) => v === a[i])));
             return [a, b];
@@ -642,10 +653,15 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
             }
 
             questionTime = COMP_TIME;
-            const names = [val('team1-name') || 'Team A', val('team2-name') || 'Team B'];
-            const orders = teamOrders();
+            teamNames = [val('team1-name') || 'Team A', val('team2-name') || 'Team B'];
+            const all = freshOrder();
+            const main = all.slice(0, MAIN_COUNT);
+            tiePool = all.slice(MAIN_COUNT);
+            phase = 'main';
+            mainRes = null;
+            const orders = teamOrders(main);
             arena.className = 'arena';
-            teams = [0, 1].map(i => createTeam(i, names[i], orders[i].map(k => makeQ(BANK[k])), false));
+            teams = [0, 1].map(i => createTeam(i, teamNames[i], orders[i].map(k => makeQ(BANK[k])), false));
             document.getElementById('comp-title').innerText = '🏆 ' + EXAM_LABEL + ' Exam — ' + EXAM_UNITS;
             document.getElementById('comp-time-wrap').style.display = '';
             document.getElementById('btn-stop').innerHTML = '<i class="fas fa-stop"></i> Stop';
@@ -747,7 +763,7 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
             team.el.timerFill.style.width = '0%';
             team.el.doneScore.innerText = 'Score: ' + team.score + ' / ' + team.questions.length;
             team.el.panel.classList.add('finished');
-            if (teams.every(t => t.finished)) endTimeout = setTimeout(endCompetition, 1200);
+            if (teams.every(t => t.finished)) endTimeout = setTimeout(afterRound, 1200);
         }
 
         function mistakesHtml(list) {
@@ -777,32 +793,79 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
             switchScreen('solo-results');
         }
 
+        // Shows a short message on the full-screen overlay, then continues
+        function announce(html, ms, done) {
+            const ov = document.getElementById('countdown');
+            ov.innerHTML = '<div class="announce">' + html + '</div>';
+            ov.classList.add('show');
+            countdownTimer = setTimeout(() => { countdownTimer = null; ov.classList.remove('show'); ov.innerHTML = ''; done(); }, ms);
+        }
+
+        // After both teams finish a round: tie-break if the main round is tied, otherwise show results
+        function afterRound() {
+            endTimeout = null;
+            const [a, b] = teams;
+            if (phase === 'main' && a.score === b.score && tiePool.length) {
+                mainRes = teams.map(t => ({ score: t.score, total: t.questions.length, mistakes: t.mistakes, timeUsed: t.timeUsed }));
+                phase = 'tie';
+                running = false;
+                playSound('tick');
+                announce('🤝 TIE! ' + a.score + ' – ' + b.score + '<small>Tie-break round: ' + tiePool.length + ' more questions</small>', 2600, startTieBreak);
+                return;
+            }
+            endCompetition();
+        }
+
+        function startTieBreak() {
+            const orders = teamOrders(tiePool);
+            arena.innerHTML = '';
+            arena.className = 'arena';
+            teams = [0, 1].map(i => createTeam(i, teamNames[i], orders[i].map(k => makeQ(BANK[k])), false));
+            document.getElementById('comp-title').innerText = '⚡ Tie-break Round — ' + EXAM_LABEL + ' Exam';
+            runCountdown(() => { running = true; teams.forEach(t => loadQuestion(t)); });
+        }
+
         function endCompetition() {
             stopAll();
-            const [a, b] = teams;
-            let winner = null, byTime = false;
-            if (a.score !== b.score) winner = a.score > b.score ? a : b;
-            else if (Math.abs(a.timeUsed - b.timeUsed) >= 100) { winner = a.timeUsed < b.timeUsed ? a : b; byTime = true; }
+            const tie = phase === 'tie' && mainRes;
+            const res = teams.map((t, i) => {
+                const m = tie ? mainRes[i] : { score: t.score, total: t.questions.length, mistakes: t.mistakes, timeUsed: t.timeUsed };
+                return {
+                    idx: t.idx, name: t.name,
+                    main: m.score, mainTotal: m.total,
+                    tb: tie ? t.score : null, tbTotal: tie ? t.questions.length : 0,
+                    time: m.timeUsed + (tie ? t.timeUsed : 0),
+                    mistakes: tie ? m.mistakes.concat(t.mistakes) : m.mistakes
+                };
+            });
+            const [a, b] = res;
+            let winner = null, how = '';
+            if (a.main !== b.main) winner = a.main > b.main ? a : b;
+            else if (tie && a.tb !== b.tb) { winner = a.tb > b.tb ? a : b; how = 'tie'; }
+            else if (Math.abs(a.time - b.time) >= 100) { winner = a.time < b.time ? a : b; how = 'time'; }
 
             const banner = document.getElementById('winner-banner');
+            const note = how === 'tie' ? 'Won in the tie-break round' : how === 'time' ? 'Still equal after the tie-break — won by faster time' : '';
             if (winner) {
                 banner.innerHTML = '🏆 Winner: ' + esc(winner.name) +
-                    (byTime ? '<div style="font-size:1rem;color:#64748b;font-weight:600;margin-top:6px">Same score — won by faster time</div>' : '');
-                lastResultText = 'Winner: ' + winner.name + (byTime ? ' (faster time)' : '');
+                    (note ? '<div style="font-size:1rem;color:#64748b;font-weight:600;margin-top:6px">' + note + '</div>' : '');
+                lastResultText = 'Winner: ' + winner.name + (how === 'tie' ? ' (tie-break round)' : how === 'time' ? ' (faster time)' : '');
                 playSound('win');
             } else {
                 banner.innerHTML = "🤝 It's a Draw!";
                 lastResultText = "It's a draw";
             }
+            lastRes = res;
             const cards = document.getElementById('score-cards');
             cards.innerHTML = '';
-            teams.forEach(t => {
+            res.forEach(t => {
                 const card = document.createElement('div');
                 card.className = 'score-card t' + t.idx + (winner === t ? ' win' : '');
                 card.innerHTML = `
                     <h4>${winner === t ? '🏆 ' : ''}${esc(t.name)}</h4>
-                    <div class="big">${t.score} / ${t.questions.length}</div>
-                    <div class="meta"><i class="fas fa-stopwatch"></i> Time: ${(t.timeUsed / 1000).toFixed(1)}s</div>
+                    <div class="big">${t.main} / ${t.mainTotal}</div>
+                    ${t.tb !== null ? `<div class="meta tb-line"><i class="fas fa-bolt"></i> Tie-break: ${t.tb} / ${t.tbTotal}</div>` : ''}
+                    <div class="meta"><i class="fas fa-stopwatch"></i> Time: ${(t.time / 1000).toFixed(1)}s</div>
                     <div class="results-list">${mistakesHtml(t.mistakes)}</div>`;
                 cards.appendChild(card);
             });
@@ -827,14 +890,14 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
                 ' (' + Math.round(t.score / t.questions.length * 100) + '%)');
         }
 
+        let lastRes = null;
         function sendCompResult() {
-            if (teams.length < 2) return;
+            if (!lastRes) return;
             const cls = val('class-name-input');
-            const [a, b] = teams;
+            const line = (icon, t) => icon + ' ' + t.name + ': ' + t.main + ' / ' + t.mainTotal +
+                (t.tb !== null ? ' | Tie-break: ' + t.tb + ' / ' + t.tbTotal : '') + ' (' + (t.time / 1000).toFixed(1) + 's)\n';
             openWhatsApp('🏆 *Exam Competition Result*\n' + (cls ? '🏫 Class: ' + cls + '\n' : '') + resultHeader() + '\n' +
-                '🔵 ' + a.name + ': ' + a.score + ' / ' + a.questions.length + ' (' + (a.timeUsed / 1000).toFixed(1) + 's)\n' +
-                '🟠 ' + b.name + ': ' + b.score + ' / ' + b.questions.length + ' (' + (b.timeUsed / 1000).toFixed(1) + 's)\n\n' +
-                '🥇 ' + lastResultText);
+                line('🔵', lastRes[0]) + line('🟠', lastRes[1]) + '\n🥇 ' + lastResultText);
         }
 
         setMode('solo');
