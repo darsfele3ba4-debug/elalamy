@@ -327,6 +327,8 @@ body.compact .main-footer { display: none; }
 body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
 
 /* ===== Exam additions ===== */
+.team-panel.solo .timer-num, .team-panel.solo .timer-bar { display: block; }
+.team-panel.solo .team-meta { margin-bottom: 6px; }
 .exam-hero { display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin: 6px 0 22px; }
 .exam-chip { background:#eff6ff; border:2px solid #bfdbfe; color:var(--primary); font-weight:700; border-radius:999px; padding:8px 16px; display:inline-flex; gap:8px; align-items:center; }
 .btn-start {
@@ -380,6 +382,7 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
             <p>Units 1, 2 & 3 — Term 1</p>
             <div class="exam-hero">
                 <span class="exam-chip"><i class="fas fa-list-ol"></i> 30 questions</span>
+                <span class="exam-chip"><i class="fas fa-stopwatch"></i> 30 seconds per question</span>
                 <span class="exam-chip"><i class="fas fa-random"></i> New order every time</span>
             </div>
 
@@ -497,7 +500,7 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
         const EXAM_UNITS = "Units 1, 2 & 3";
         const BANK = [{"unit": 1, "text": "Be careful when you reach the _____ because cars may come from all directions.", "ans": "crossroads", "wrong": ["bridge", "stoppage", "pavement"]}, {"unit": 1, "text": "The government works hard to _____ Egypt's ancient monuments for future generations.", "ans": "preserve", "wrong": ["establish", "waste", "decorate"]}, {"unit": 1, "text": "The Silk Road allowed _____ to trade valuable goods between Asia and Europe.", "ans": "merchants", "wrong": ["consumers", "kings", "musicians"]}, {"unit": 1, "text": "The letter _____ two days ago, but I still haven't read it.", "ans": "was delivered", "wrong": ["delivers", "delivered", "has delivered"]}, {"unit": 1, "text": "We _____ to that old cinema every Friday, but it closed down last year.", "ans": "used to go", "wrong": ["go", "are going", "have gone"]}, {"unit": 1, "text": "Preserving our _____ helps future generations understand where they came from.", "ans": "heritage", "wrong": ["household", "highlight", "hindrance"]}, {"unit": 1, "text": "Doctors have found a _____ between lack of sleep and poor concentration.", "ans": "connection", "wrong": ["hazard", "hindrance", "habitat"]}, {"unit": 1, "text": "The old man's _____ began to weaken, so he had to wear glasses.", "ans": "vision", "wrong": ["hearing", "balance", "appetite"]}, {"unit": 1, "text": "_____ the meeting, everyone listened carefully to the manager.", "ans": "During", "wrong": ["On", "When", "While"]}, {"unit": 1, "text": "Just as the train _____, two passengers arrived at the station.", "ans": "was leaving", "wrong": ["leaves", "left", "was left"]}, {"unit": 2, "text": "Karma's _____ grew as she received more positive feedback on her work.", "ans": "confidence", "wrong": ["confident", "confidential", "confidentially"]}, {"unit": 2, "text": "The hikers got lost and ended up in a/an _____ area with no phone signal.", "ans": "isolated", "wrong": ["confident", "inspired", "connected"]}, {"unit": 2, "text": "It's rude to _____ at people, even if they look unusual.", "ans": "stare", "wrong": ["connect", "inspire", "glance"]}, {"unit": 2, "text": "Because of the storm, the fishermen _____ return to the shore yesterday.", "ans": "had to", "wrong": ["have to", "don't have to", "will have to"]}, {"unit": 2, "text": "To enter the museum, visitors _____ buy a ticket at the entrance.", "ans": "have to", "wrong": ["has to", "should have", "had to"]}, {"unit": 2, "text": "In case of _____, please use the stairs instead of the elevator.", "ans": "emergency", "wrong": ["appointment", "ceremony", "routine"]}, {"unit": 2, "text": "It would be _____ to walk alone in that neighborhood late at night.", "ans": "risky", "wrong": ["typical", "pleasant", "convenient"]}, {"unit": 2, "text": "Without _____, it's difficult to build strong relationships with others.", "ans": "empathy", "wrong": ["currency", "routine", "authority"]}, {"unit": 2, "text": "The museum is only five minutes away, so we _____ take a taxi.", "ans": "needn't", "wrong": ["have to", "must", "should"]}, {"unit": 2, "text": "My father repaired the old bike, so I _____ a new one.", "ans": "needn't have bought", "wrong": ["had to buy", "should buy", "needn't buy"]}, {"unit": 3, "text": "The soldier was accused of _____ his fellow troops by leaking their plans to the enemy.", "ans": "betraying", "wrong": ["volunteering", "empathizing", "rewarding"]}, {"unit": 3, "text": "That hotel has a bad _____ for poor customer service.", "ans": "reputation", "wrong": ["emergency", "reward", "connection"]}, {"unit": 3, "text": "Social media is full of _____ news stories designed to mislead people.", "ans": "fake", "wrong": ["accurate", "verified", "informed"]}, {"unit": 3, "text": "If Youssef had a bicycle, he _____ to school every day.", "ans": "would ride", "wrong": ["rides", "will ride", "would have ridden"]}, {"unit": 3, "text": "If Ali _____ more carefully, he wouldn't have broken the vase.", "ans": "had walked", "wrong": ["walks", "walked", "have walked"]}, {"unit": 3, "text": "If I see Mona tomorrow, I _____ her your message.", "ans": "will give", "wrong": ["give", "would give", "would have given"]}, {"unit": 3, "text": "He got upset because of a false _____ about his family.", "ans": "rumor", "wrong": ["price", "lesson", "rule"]}, {"unit": 3, "text": "The art class is a great way to boost _____ in young kids.", "ans": "creativity", "wrong": ["denial", "weight", "height"]}, {"unit": 3, "text": "_____ your kindness, I wouldn't have finished the work on time.", "ans": "But for", "wrong": ["Unless", "In case", "Should"]}, {"unit": 3, "text": "_____ the weather to improve, we would go on a picnic.", "ans": "Were", "wrong": ["Had", "Should", "Unless"]}];
         const TEACHER_PHONE = '201099151531';
-        const COMP_TIME = 30;              // seconds per question in a team competition
+        const COMP_TIME = 30;              // seconds per question (solo and team competition)
 
         let mode = 'solo';
         let runMode = 'solo';
@@ -532,7 +535,7 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
         function switchScreen(id) {
             screens.forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
-            document.body.classList.toggle('compact', id === 'game-screen' && runMode === 'comp');
+            document.body.classList.toggle('compact', id === 'game-screen');
             window.scrollTo(0, 0);
         }
 
@@ -543,7 +546,7 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
             document.getElementById('comp-settings').style.display = m === 'comp' ? 'grid' : 'none';
             document.getElementById('comp-rules').style.display = m === 'comp' ? 'block' : 'none';
             document.getElementById('mode-hint').innerHTML = m === 'solo'
-                ? '<i class="fas fa-info-circle"></i> Answer on your own — ' + BANK.length + ' questions in a new random order every time, no time limit.'
+                ? '<i class="fas fa-info-circle"></i> Answer on your own — ' + BANK.length + ' questions in a new random order every time, 30 seconds for each question.'
                 : '<i class="fas fa-info-circle"></i> Two teams answer at the same time, each on its own half of the screen.';
         }
 
@@ -626,11 +629,11 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
             arena.innerHTML = '';
 
             if (runMode === 'solo') {
-                questionTime = 0;
+                questionTime = COMP_TIME;
                 arena.className = 'arena solo';
                 teams = [createTeam(0, '🎯 Your Score', freshOrder().map(i => makeQ(BANK[i])), true)];
                 document.getElementById('comp-title').innerText = EXAM_LABEL + ' Exam — ' + EXAM_UNITS;
-                document.getElementById('comp-time-wrap').style.display = 'none';
+                document.getElementById('comp-time-wrap').style.display = '';
                 document.getElementById('btn-stop').innerHTML = '<i class="fas fa-arrow-left"></i> Back';
                 switchScreen('game-screen');
                 running = true;

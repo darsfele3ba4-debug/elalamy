@@ -327,6 +327,8 @@ body.compact .main-footer { display: none; }
 body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
 
 /* ===== Exam additions ===== */
+.team-panel.solo .timer-num, .team-panel.solo .timer-bar { display: block; }
+.team-panel.solo .team-meta { margin-bottom: 6px; }
 .exam-hero { display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin: 6px 0 22px; }
 .exam-chip { background:#eff6ff; border:2px solid #bfdbfe; color:var(--primary); font-weight:700; border-radius:999px; padding:8px 16px; display:inline-flex; gap:8px; align-items:center; }
 .btn-start {
@@ -380,6 +382,7 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
             <p>Units 1, 2 & 3 — Term 1</p>
             <div class="exam-hero">
                 <span class="exam-chip"><i class="fas fa-list-ol"></i> 30 questions</span>
+                <span class="exam-chip"><i class="fas fa-stopwatch"></i> 30 seconds per question</span>
                 <span class="exam-chip"><i class="fas fa-random"></i> New order every time</span>
             </div>
 
@@ -497,7 +500,7 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
         const EXAM_UNITS = "Units 1, 2 & 3";
         const BANK = [{"unit": 1, "text": "You should always _____ your phone to see if you have any important messages.", "ans": "check", "wrong": ["search", "remind", "type"]}, {"unit": 1, "text": "The street was very noisy so I couldn't hear the audio clearly. The opposite of \"noisy\" is \"_____\".", "ans": "quiet", "wrong": ["tired", "flat", "smart"]}, {"unit": 1, "text": "My science teacher always informs us new facts. The suffix \"_____\" changes the verb \"inform\" into a noun.", "ans": "-ation", "wrong": ["-ful", "-al", "-ly"]}, {"unit": 1, "text": "A _____ is a modern computer that you can carry with you and use in different places easily.", "ans": "laptop", "wrong": ["website", "screen", "space"]}, {"unit": 1, "text": "The documentary about our planet was very interesting, not _____ at all.", "ans": "boring", "wrong": ["modern", "smart", "useful"]}, {"unit": 1, "text": "To speak English _____ is a goal that many students want to achieve.", "ans": "well", "wrong": ["badly", "quiet", "nervous"]}, {"unit": 1, "text": "Using _____ helps protect your eyes when reading in low light.", "ans": "night mode", "wrong": ["pollution", "diesel", "space"]}, {"unit": 1, "text": "Students can _____ together to finish the project on time.", "ans": "collaborate", "wrong": ["pollute", "launch", "unlock"]}, {"unit": 1, "text": "Choose the correct sentence: (Omar goes to the library on weekends.)", "ans": "How often does Omar go to the library?", "wrong": ["How often Omar goes to the library?", "How often do Omar go to the library?", "How often does Omar goes to the library?"]}, {"unit": 1, "text": "Hala is rarely on time for school. = Hala is _____ late for school.", "ans": "always", "wrong": ["never", "rarely", "hardly ever"]}, {"unit": 2, "text": "When I study for my test, I create a colorful _____ to organize the information clearly.", "ans": "mind map", "wrong": ["experiment", "explanation", "topic"]}, {"unit": 2, "text": "I always _____ notes while the teacher is speaking to help me remember later.", "ans": "take", "wrong": ["build", "do", "make"]}, {"unit": 2, "text": "If you want to get better grades, you should avoid any _____ that stops you from working well.", "ans": "distraction", "wrong": ["technique", "experience", "goal"]}, {"unit": 2, "text": "My teacher asked me to draw a simple _____ to explain how the water cycle works.", "ans": "diagram", "wrong": ["waste", "pronunciation", "communication"]}, {"unit": 2, "text": "To improve your English, you should _____ your speaking every day with your classmates.", "ans": "practice", "wrong": ["waste", "loudly", "clearly"]}, {"unit": 2, "text": "We do _____ math activities where we jump on one foot to count numbers.", "ans": "kinesthetic", "wrong": ["colorful", "auditory", "neat"]}, {"unit": 2, "text": "Real leaders show great _____; they never quit or give up when facing a hard challenge.", "ans": "determination", "wrong": ["hesitation", "discount", "survey"]}, {"unit": 2, "text": "Sometimes we find a difficult problem, but we work together to find a _____.", "ans": "solution", "wrong": ["courage", "teamwork", "cooperation"]}, {"unit": 2, "text": "Choose the correct sentence: (My brother is able to swim across the pool easily.)", "ans": "My brother can swim across the pool easily.", "wrong": ["My brother can swims across the pool easily.", "My brother cans swim across the pool easily.", "My brother can to swim across the pool easily."]}, {"unit": 2, "text": "Look! The bus _____ to the station.", "ans": "is coming", "wrong": ["comes", "came", "come"]}, {"unit": 3, "text": "A person who is very brave and does great things for other people is a real _____.", "ans": "hero", "wrong": ["soldier", "army", "officer"]}, {"unit": 3, "text": "Everyone admires the soldier because he is very _____, he never feels afraid.", "ans": "brave", "wrong": ["caring", "cheap", "absent"]}, {"unit": 3, "text": "The famous scientist made a great _____ when he discovered a new thing.", "ans": "achievement", "wrong": ["achieve", "inspiring", "determination"]}, {"unit": 3, "text": "A _____ is a book about the life of a famous person.", "ans": "biography", "wrong": ["challenge", "dedication", "disease"]}, {"unit": 3, "text": "To _____ means to have a positive impact on the world around you.", "ans": "make a difference", "wrong": ["face a situation", "take treatment", "follow dreams"]}, {"unit": 3, "text": "Add the suffix \"_____\" to the verb \"lead\" to get the noun for a person who guides others.", "ans": "-er", "wrong": ["-ion", "-ence", "-al"]}, {"unit": 3, "text": "My mother's _____ to our family means she always puts us first.", "ans": "dedication", "wrong": ["agreement", "happiness", "pride"]}, {"unit": 3, "text": "The soldiers fought bravely to _____ their country against the enemy attack.", "ans": "defend", "wrong": ["combine", "grin", "waste"]}, {"unit": 3, "text": "Choose the correct sentence: (They buy a new car for their trip. → yesterday)", "ans": "They bought a new car for their trip yesterday.", "wrong": ["They buyed a new car for their trip yesterday.", "They buy a new car for their trip yesterday.", "They were buy a new car for their trip yesterday."]}, {"unit": 3, "text": "Choose the correct sentence: (We traveled to Alexandria last month. → When)", "ans": "When did you travel to Alexandria?", "wrong": ["When did you traveled to Alexandria?", "When you traveled to Alexandria?", "When do you travel to Alexandria?"]}];
         const TEACHER_PHONE = '201099151531';
-        const COMP_TIME = 30;              // seconds per question in a team competition
+        const COMP_TIME = 30;              // seconds per question (solo and team competition)
 
         let mode = 'solo';
         let runMode = 'solo';
@@ -532,7 +535,7 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
         function switchScreen(id) {
             screens.forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
-            document.body.classList.toggle('compact', id === 'game-screen' && runMode === 'comp');
+            document.body.classList.toggle('compact', id === 'game-screen');
             window.scrollTo(0, 0);
         }
 
@@ -543,7 +546,7 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
             document.getElementById('comp-settings').style.display = m === 'comp' ? 'grid' : 'none';
             document.getElementById('comp-rules').style.display = m === 'comp' ? 'block' : 'none';
             document.getElementById('mode-hint').innerHTML = m === 'solo'
-                ? '<i class="fas fa-info-circle"></i> Answer on your own — ' + BANK.length + ' questions in a new random order every time, no time limit.'
+                ? '<i class="fas fa-info-circle"></i> Answer on your own — ' + BANK.length + ' questions in a new random order every time, 30 seconds for each question.'
                 : '<i class="fas fa-info-circle"></i> Two teams answer at the same time, each on its own half of the screen.';
         }
 
@@ -626,11 +629,11 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
             arena.innerHTML = '';
 
             if (runMode === 'solo') {
-                questionTime = 0;
+                questionTime = COMP_TIME;
                 arena.className = 'arena solo';
                 teams = [createTeam(0, '🎯 Your Score', freshOrder().map(i => makeQ(BANK[i])), true)];
                 document.getElementById('comp-title').innerText = EXAM_LABEL + ' Exam — ' + EXAM_UNITS;
-                document.getElementById('comp-time-wrap').style.display = 'none';
+                document.getElementById('comp-time-wrap').style.display = '';
                 document.getElementById('btn-stop').innerHTML = '<i class="fas fa-arrow-left"></i> Back';
                 switchScreen('game-screen');
                 running = true;
