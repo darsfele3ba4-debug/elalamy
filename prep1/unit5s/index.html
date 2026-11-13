@@ -327,6 +327,8 @@ body.compact .main-footer { display: none; }
 body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
 
 /* ===== Spelling games ===== */
+.lesson-label { font-weight:800; color:var(--dark); margin:4px 0 8px; }
+.lesson-switch { flex-wrap:wrap; margin-bottom:18px; }
 .menu-grid.six { grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
 .game-card .ar-sub { display:block; font-family:'Cairo', sans-serif; font-size:0.95rem; font-weight:700; color:#64748b; margin-top:4px; direction:rtl; }
 .game-card:hover .ar-sub { color:#e2e8f0; }
@@ -391,7 +393,14 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
 
         <div id="main-menu" class="screen active">
             <h2>Spelling &amp; Dictation Challenge</h2>
-            <p>Prep 1 - Unit 5: Future Dreams — 102 words</p>
+            <p>Prep 1 - Unit 5: Future Dreams — <span id="pool-count"></span></p>
+
+            <div class="lesson-label"><i class="fas fa-book-open"></i> Choose the lessons</div>
+            <div class="mode-switch lesson-switch">
+                <button class="mode-btn active" id="lesson-1" onclick="setLesson(1)"><i class="fas fa-bookmark"></i> Lessons 1 &amp; 2</button>
+                <button class="mode-btn" id="lesson-2" onclick="setLesson(2)"><i class="fas fa-bookmark"></i> Lessons 3, 4 &amp; 6</button>
+                <button class="mode-btn" id="lesson-0" onclick="setLesson(0)"><i class="fas fa-layer-group"></i> Whole Unit</button>
+            </div>
 
             <div class="mode-switch">
                 <button class="mode-btn active" id="mode-solo" onclick="setMode('solo')"><i class="fas fa-user"></i> Play Now</button>
@@ -518,7 +527,7 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
             } catch (e) {}
         }
 
-        const WORDS = [{"w": "ambition", "ar": "طموح", "pos": "n"}, {"w": "astronaut", "ar": "رائد فضاء", "pos": "n"}, {"w": "career", "ar": "حياة مهنية", "pos": "n"}, {"w": "confidence", "ar": "ثقة", "pos": "n"}, {"w": "designer", "ar": "مصمم", "pos": "n"}, {"w": "develop", "ar": "يطوّر / ينمّي", "pos": "v"}, {"w": "dream", "ar": "حلم", "pos": "n"}, {"w": "effort", "ar": "جهد", "pos": "n"}, {"w": "explore", "ar": "يستكشف", "pos": "v"}, {"w": "future", "ar": "مستقبل", "pos": "n"}, {"w": "goal", "ar": "هدف", "pos": "n"}, {"w": "interview", "ar": "مقابلة شخصية", "pos": "n"}, {"w": "opportunity", "ar": "فرصة", "pos": "n"}, {"w": "passion", "ar": "شغف", "pos": "n"}, {"w": "path", "ar": "مسار / طريق", "pos": "n"}, {"w": "plan", "ar": "خطة", "pos": "n"}, {"w": "profession", "ar": "مهنة (تحتاج تدريبًا أو تعليمًا)", "pos": "n"}, {"w": "talent", "ar": "موهبة", "pos": "n"}, {"w": "advertisement", "ar": "إعلان", "pos": "n"}, {"w": "amazing", "ar": "مذهل / رائع", "pos": "adj"}, {"w": "believe", "ar": "يعتقد / يؤمن", "pos": "v"}, {"w": "bright", "ar": "مشرق / لامع", "pos": "adj"}, {"w": "chemistry", "ar": "الكيمياء", "pos": "n"}, {"w": "collect", "ar": "يجمع", "pos": "v"}, {"w": "contact", "ar": "يتواصل مع", "pos": "v"}, {"w": "country", "ar": "دولة", "pos": "n"}, {"w": "decide", "ar": "يقرر", "pos": "v"}, {"w": "design", "ar": "يصمم", "pos": "v"}, {"w": "discover", "ar": "يكتشف", "pos": "v"}, {"w": "drawing", "ar": "رسم", "pos": "n"}, {"w": "enjoy", "ar": "يستمتع بـ", "pos": "v"}, {"w": "excited", "ar": "متحمس", "pos": "adj"}, {"w": "fail", "ar": "يفشل / يرسب", "pos": "v"}, {"w": "free", "ar": "مجاني / حر", "pos": "adj"}, {"w": "geology", "ar": "الجيولوجيا", "pos": "n"}, {"w": "hard", "ar": "صعب", "pos": "adj"}, {"w": "hope", "ar": "أمل", "pos": "n"}, {"w": "intention", "ar": "نية", "pos": "n"}, {"w": "job", "ar": "وظيفة", "pos": "n"}, {"w": "join", "ar": "ينضم إلى", "pos": "v"}, {"w": "landing", "ar": "هبوط", "pos": "n"}, {"w": "map", "ar": "خريطة", "pos": "n"}, {"w": "mission", "ar": "مهمة", "pos": "n"}, {"w": "option", "ar": "خيار", "pos": "n"}, {"w": "participate", "ar": "يشارك", "pos": "v"}, {"w": "program", "ar": "برنامج", "pos": "n"}, {"w": "real", "ar": "حقيقي / واقعي", "pos": "adj"}, {"w": "reality", "ar": "الواقع", "pos": "n"}, {"w": "rock", "ar": "صخرة", "pos": "n"}, {"w": "safe", "ar": "آمن", "pos": "adj"}, {"w": "science", "ar": "العلوم", "pos": "n"}, {"w": "scientist", "ar": "عالِم", "pos": "n"}, {"w": "select", "ar": "يختار", "pos": "v"}, {"w": "site", "ar": "موقع", "pos": "n"}, {"w": "skill", "ar": "مهارة", "pos": "n"}, {"w": "step", "ar": "خطوة", "pos": "n"}, {"w": "succeed", "ar": "ينجح", "pos": "v"}, {"w": "support", "ar": "يدعم / يساند", "pos": "v"}, {"w": "unsure", "ar": "غير متأكد", "pos": "adj"}, {"w": "wait", "ar": "ينتظر", "pos": "v"}, {"w": "website", "ar": "موقع إلكتروني", "pos": "n"}, {"w": "whole", "ar": "كامل / كل", "pos": "adj"}, {"w": "workshop", "ar": "ورشة عمل", "pos": "n"}, {"w": "achieve", "ar": "يحقق / ينجز", "pos": "v"}, {"w": "care", "ar": "رعاية", "pos": "n"}, {"w": "caring", "ar": "مهتم / حنون", "pos": "adj"}, {"w": "difference", "ar": "اختلاف / فرق", "pos": "n"}, {"w": "education", "ar": "تعليم", "pos": "n"}, {"w": "match", "ar": "يطابق / يلائم", "pos": "v"}, {"w": "perfectly", "ar": "بشكل مثالي / تمامًا", "pos": "adv"}, {"w": "train", "ar": "يتدرب / يدرّب", "pos": "v"}, {"w": "shy", "ar": "خجول", "pos": "adj"}, {"w": "success", "ar": "نجاح", "pos": "n"}, {"w": "successful", "ar": "ناجح", "pos": "adj"}, {"w": "training", "ar": "تدريب", "pos": "n"}, {"w": "treat", "ar": "يعالج", "pos": "v"}, {"w": "unique", "ar": "فريد من نوعه / مميز", "pos": "adj"}, {"w": "university", "ar": "جامعة", "pos": "n"}, {"w": "wish", "ar": "أمنية", "pos": "n"}, {"w": "animal", "ar": "حيوان", "pos": "n"}, {"w": "different", "ar": "مختلف", "pos": "adj"}, {"w": "exciting", "ar": "مثير / مشوّق", "pos": "adj"}, {"w": "hospital", "ar": "مستشفى", "pos": "n"}, {"w": "important", "ar": "مهم", "pos": "adj"}, {"w": "owner", "ar": "مالك الشيء", "pos": "n"}, {"w": "patient", "ar": "مريض (اسم)", "pos": "n"}, {"w": "practice", "ar": "ممارسة", "pos": "n"}, {"w": "sick", "ar": "مريض (صفة)", "pos": "adj"}, {"w": "side", "ar": "جانب / طرف", "pos": "n"}, {"w": "smile", "ar": "يبتسم", "pos": "v"}, {"w": "medicine", "ar": "طب / دواء", "pos": "n"}, {"w": "opinion", "ar": "رأي", "pos": "n"}, {"w": "tired", "ar": "مُرهَق / متعب", "pos": "adj"}, {"w": "vet", "ar": "طبيب بيطري", "pos": "n"}, {"w": "confident", "ar": "واثق", "pos": "adj"}, {"w": "professional", "ar": "احترافي / محترف", "pos": "adj"}, {"w": "talented", "ar": "موهوب", "pos": "adj"}, {"w": "sure", "ar": "متأكد", "pos": "adj"}, {"w": "became", "ar": "أصبح (في الماضي)", "pos": "past:become"}, {"w": "met", "ar": "قابَل (في الماضي)", "pos": "past:meet"}, {"w": "spoke", "ar": "تحدّث (في الماضي)", "pos": "past:speak"}, {"w": "thought", "ar": "فكّر (في الماضي)", "pos": "past:think"}];
+        const WORDS = [{"w": "ambition", "ar": "طموح", "pos": "n", "l": 1}, {"w": "astronaut", "ar": "رائد فضاء", "pos": "n", "l": 1}, {"w": "career", "ar": "حياة مهنية", "pos": "n", "l": 1}, {"w": "confidence", "ar": "ثقة", "pos": "n", "l": 1}, {"w": "designer", "ar": "مصمم", "pos": "n", "l": 1}, {"w": "develop", "ar": "يطوّر / ينمّي", "pos": "v", "l": 1}, {"w": "dream", "ar": "حلم", "pos": "n", "l": 1}, {"w": "effort", "ar": "جهد", "pos": "n", "l": 1}, {"w": "explore", "ar": "يستكشف", "pos": "v", "l": 1}, {"w": "future", "ar": "مستقبل", "pos": "n", "l": 1}, {"w": "goal", "ar": "هدف", "pos": "n", "l": 1}, {"w": "interview", "ar": "مقابلة شخصية", "pos": "n", "l": 1}, {"w": "opportunity", "ar": "فرصة", "pos": "n", "l": 1}, {"w": "passion", "ar": "شغف", "pos": "n", "l": 1}, {"w": "path", "ar": "مسار / طريق", "pos": "n", "l": 1}, {"w": "plan", "ar": "خطة", "pos": "n", "l": 1}, {"w": "profession", "ar": "مهنة (تحتاج تدريبًا أو تعليمًا)", "pos": "n", "l": 1}, {"w": "talent", "ar": "موهبة", "pos": "n", "l": 1}, {"w": "advertisement", "ar": "إعلان", "pos": "n", "l": 1}, {"w": "amazing", "ar": "مذهل / رائع", "pos": "adj", "l": 1}, {"w": "believe", "ar": "يعتقد / يؤمن", "pos": "v", "l": 1}, {"w": "bright", "ar": "مشرق / لامع", "pos": "adj", "l": 1}, {"w": "chemistry", "ar": "الكيمياء", "pos": "n", "l": 1}, {"w": "collect", "ar": "يجمع", "pos": "v", "l": 1}, {"w": "contact", "ar": "يتواصل مع", "pos": "v", "l": 1}, {"w": "country", "ar": "دولة", "pos": "n", "l": 1}, {"w": "decide", "ar": "يقرر", "pos": "v", "l": 1}, {"w": "design", "ar": "يصمم", "pos": "v", "l": 1}, {"w": "discover", "ar": "يكتشف", "pos": "v", "l": 1}, {"w": "drawing", "ar": "رسم", "pos": "n", "l": 1}, {"w": "enjoy", "ar": "يستمتع بـ", "pos": "v", "l": 1}, {"w": "excited", "ar": "متحمس", "pos": "adj", "l": 1}, {"w": "fail", "ar": "يفشل / يرسب", "pos": "v", "l": 1}, {"w": "free", "ar": "مجاني / حر", "pos": "adj", "l": 1}, {"w": "geology", "ar": "الجيولوجيا", "pos": "n", "l": 1}, {"w": "hard", "ar": "صعب", "pos": "adj", "l": 1}, {"w": "hope", "ar": "أمل", "pos": "n", "l": 1}, {"w": "intention", "ar": "نية", "pos": "n", "l": 1}, {"w": "job", "ar": "وظيفة", "pos": "n", "l": 1}, {"w": "join", "ar": "ينضم إلى", "pos": "v", "l": 1}, {"w": "landing", "ar": "هبوط", "pos": "n", "l": 1}, {"w": "map", "ar": "خريطة", "pos": "n", "l": 1}, {"w": "mission", "ar": "مهمة", "pos": "n", "l": 1}, {"w": "option", "ar": "خيار", "pos": "n", "l": 1}, {"w": "participate", "ar": "يشارك", "pos": "v", "l": 1}, {"w": "program", "ar": "برنامج", "pos": "n", "l": 1}, {"w": "real", "ar": "حقيقي / واقعي", "pos": "adj", "l": 1}, {"w": "reality", "ar": "الواقع", "pos": "n", "l": 1}, {"w": "rock", "ar": "صخرة", "pos": "n", "l": 1}, {"w": "safe", "ar": "آمن", "pos": "adj", "l": 1}, {"w": "science", "ar": "العلوم", "pos": "n", "l": 1}, {"w": "scientist", "ar": "عالِم", "pos": "n", "l": 1}, {"w": "select", "ar": "يختار", "pos": "v", "l": 1}, {"w": "site", "ar": "موقع", "pos": "n", "l": 1}, {"w": "skill", "ar": "مهارة", "pos": "n", "l": 1}, {"w": "step", "ar": "خطوة", "pos": "n", "l": 1}, {"w": "succeed", "ar": "ينجح", "pos": "v", "l": 1}, {"w": "support", "ar": "يدعم / يساند", "pos": "v", "l": 1}, {"w": "unsure", "ar": "غير متأكد", "pos": "adj", "l": 1}, {"w": "wait", "ar": "ينتظر", "pos": "v", "l": 1}, {"w": "website", "ar": "موقع إلكتروني", "pos": "n", "l": 1}, {"w": "whole", "ar": "كامل / كل", "pos": "adj", "l": 1}, {"w": "workshop", "ar": "ورشة عمل", "pos": "n", "l": 1}, {"w": "achieve", "ar": "يحقق / ينجز", "pos": "v", "l": 2}, {"w": "care", "ar": "رعاية", "pos": "n", "l": 2}, {"w": "caring", "ar": "مهتم / حنون", "pos": "adj", "l": 2}, {"w": "difference", "ar": "اختلاف / فرق", "pos": "n", "l": 2}, {"w": "education", "ar": "تعليم", "pos": "n", "l": 2}, {"w": "match", "ar": "يطابق / يلائم", "pos": "v", "l": 2}, {"w": "perfectly", "ar": "بشكل مثالي / تمامًا", "pos": "adv", "l": 2}, {"w": "train", "ar": "يتدرب / يدرّب", "pos": "v", "l": 2}, {"w": "shy", "ar": "خجول", "pos": "adj", "l": 2}, {"w": "success", "ar": "نجاح", "pos": "n", "l": 2}, {"w": "successful", "ar": "ناجح", "pos": "adj", "l": 2}, {"w": "training", "ar": "تدريب", "pos": "n", "l": 2}, {"w": "treat", "ar": "يعالج", "pos": "v", "l": 2}, {"w": "unique", "ar": "فريد من نوعه / مميز", "pos": "adj", "l": 2}, {"w": "university", "ar": "جامعة", "pos": "n", "l": 2}, {"w": "wish", "ar": "أمنية", "pos": "n", "l": 2}, {"w": "animal", "ar": "حيوان", "pos": "n", "l": 2}, {"w": "different", "ar": "مختلف", "pos": "adj", "l": 2}, {"w": "exciting", "ar": "مثير / مشوّق", "pos": "adj", "l": 2}, {"w": "hospital", "ar": "مستشفى", "pos": "n", "l": 2}, {"w": "important", "ar": "مهم", "pos": "adj", "l": 2}, {"w": "owner", "ar": "مالك الشيء", "pos": "n", "l": 2}, {"w": "patient", "ar": "مريض (اسم)", "pos": "n", "l": 2}, {"w": "practice", "ar": "ممارسة", "pos": "n", "l": 2}, {"w": "sick", "ar": "مريض (صفة)", "pos": "adj", "l": 2}, {"w": "side", "ar": "جانب / طرف", "pos": "n", "l": 2}, {"w": "smile", "ar": "يبتسم", "pos": "v", "l": 2}, {"w": "medicine", "ar": "طب / دواء", "pos": "n", "l": 2}, {"w": "opinion", "ar": "رأي", "pos": "n", "l": 2}, {"w": "tired", "ar": "مُرهَق / متعب", "pos": "adj", "l": 2}, {"w": "vet", "ar": "طبيب بيطري", "pos": "n", "l": 2}, {"w": "confident", "ar": "واثق", "pos": "adj", "l": 1}, {"w": "professional", "ar": "احترافي / محترف", "pos": "adj", "l": 1}, {"w": "talented", "ar": "موهوب", "pos": "adj", "l": 1}, {"w": "sure", "ar": "متأكد", "pos": "adj", "l": 1}, {"w": "became", "ar": "أصبح (في الماضي)", "pos": "past:become", "l": 2}, {"w": "met", "ar": "قابَل (في الماضي)", "pos": "past:meet", "l": 2}, {"w": "spoke", "ar": "تحدّث (في الماضي)", "pos": "past:speak", "l": 2}, {"w": "thought", "ar": "فكّر (في الماضي)", "pos": "past:think", "l": 2}];
         const ALL = new Set(WORDS.map(x => x.w));
         const TEACHER_PHONE = '201099151531';
         const QUESTION_TIME = 30;
@@ -527,7 +536,15 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
         const TILE_GAMES = [3, 4, 5];
         function posLabel(p) { return p.startsWith('past:') ? 'past of ' + p.slice(5) : POS[p]; }
 
-        let mode = 'solo', runMode = 'solo', currentGame = 1;
+        let mode = 'solo', runMode = 'solo', currentGame = 1, lesson = 1;
+        const LESSON_NAMES = { 0: 'Whole Unit', 1: 'Lessons 1 & 2', 2: 'Lessons 3, 4 & 6' };
+        function pool() { return lesson === 0 ? WORDS : WORDS.filter(x => x.l === lesson); }
+        function setLesson(l) {
+            lesson = l;
+            [0, 1, 2].forEach(k => document.getElementById('lesson-' + k).classList.toggle('active', k === l));
+            document.getElementById('pool-count').innerText = pool().length + ' words (' + LESSON_NAMES[l] + ')';
+            setMode(mode);
+        }
         let teams = [], running = false, countdownTimer = null, endTimeout = null, lastResultText = '';
         const screens = document.querySelectorAll('.screen');
         const arena = document.getElementById('arena');
@@ -650,14 +667,16 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
 
         // New words first: rotate through all words before repeating
         function pickWords(n) {
-            const key = 'u5spell-seen';
+            const P = pool();
+            n = Math.min(n, P.length);
+            const key = 'u5spell-seen-' + lesson;
             let seen = [];
             try { seen = JSON.parse(localStorage.getItem(key) || '[]'); } catch (e) {}
-            let fresh = WORDS.map((_, i) => i).filter(i => !seen.includes(i));
-            if (fresh.length < n) { seen = []; fresh = WORDS.map((_, i) => i); }
+            let fresh = P.map((_, i) => i).filter(i => !seen.includes(i));
+            if (fresh.length < n) { seen = []; fresh = P.map((_, i) => i); }
             const chosen = shuffle(fresh).slice(0, n);
             try { localStorage.setItem(key, JSON.stringify(seen.concat(chosen))); } catch (e) {}
-            return chosen.map(i => WORDS[i]);
+            return chosen.map(i => P[i]);
         }
 
         // ---------- Screens & settings ----------
@@ -722,7 +741,7 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
             runMode = mode;
             const n = parseInt(val('q-count'), 10) || 20;
             arena.innerHTML = '';
-            document.getElementById('comp-title').innerText = (runMode === 'comp' ? '🏆 ' : '') + GAME_NAMES[game];
+            document.getElementById('comp-title').innerText = (runMode === 'comp' ? '🏆 ' : '') + GAME_NAMES[game] + ' — ' + LESSON_NAMES[lesson];
 
             if (runMode === 'solo') {
                 arena.className = 'arena solo';
@@ -742,7 +761,7 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
                 do { b = shuffle(words); } while (words.length > 1 && (b[0] === a[0] || b.every((x, i) => x === a[i])));
                 sets = [a, b];
             } else {
-                const words = pickWords(Math.min(WORDS.length, n * 2));
+                const words = pickWords(Math.min(pool().length, n * 2));
                 sets = words.length >= n * 2 ? [words.slice(0, n), words.slice(n, n * 2)] : [shuffle(words).slice(0, n), shuffle(words).slice(0, n)];
             }
             arena.className = 'arena';
@@ -958,7 +977,7 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
             document.getElementById('class-name-input').value = '';
             switchScreen('results-screen');
         }
-        function header() { return '📘 Prep 1 - Unit 5: Future Dreams\n🔤 Spelling Game: ' + GAME_NAMES[currentGame] + '\n'; }
+        function header() { return '📘 Prep 1 - Unit 5: Future Dreams (' + LESSON_NAMES[lesson] + ')\n🔤 Spelling Game: ' + GAME_NAMES[currentGame] + '\n'; }
         function openWhatsApp(msg) { window.open('https://wa.me/' + TEACHER_PHONE + '?text=' + encodeURIComponent(msg), '_blank'); }
         function sendSoloResult() {
             const input = document.getElementById('student-name-input');
@@ -976,6 +995,7 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
                 '🟠 ' + b.name + ': ' + b.score + ' / ' + b.questions.length + ' (' + (b.timeUsed / 1000).toFixed(1) + 's)\n\n🥇 ' + lastResultText);
         }
         setMode('solo');
+        setLesson(1);
     </script>
 </body>
 </html>
