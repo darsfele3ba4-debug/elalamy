@@ -170,7 +170,7 @@ header {
 .timer-fill { height: 100%; width: 100%; background: var(--success); transition: width 0.1s linear, background 0.3s; }
 .timer-fill.warn { background: var(--warning); }
 .timer-fill.danger { background: var(--danger); }
-.team-panel.solo .timer-num, .team-panel.solo .timer-bar { display: none; }
+.team-panel.solo .timer-num, .team-panel.solo .timer-bar { display: block; }
 .team-panel.solo .team-meta { margin-bottom: 14px; }
 
 .question-text { font-size: 1.8rem; margin-bottom: 30px; font-weight: 800; color: var(--dark); line-height: 1.4; }
@@ -393,9 +393,7 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
                 <div>
                     <label><i class="fas fa-stopwatch"></i> Time per question</label>
                     <select id="q-time">
-                        <option value="15">15 seconds</option>
-                        <option value="20" selected>20 seconds</option>
-                        <option value="30">30 seconds</option>
+                        <option value="30" selected>30 seconds</option>
                     </select>
                 </div>
                 <div>
@@ -425,7 +423,7 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
             <div class="comp-topbar">
                 <button class="btn-back" id="btn-stop" onclick="returnToMenu()"><i class="fas fa-arrow-left"></i> Back</button>
                 <h3 id="comp-title"></h3>
-                <h3 id="comp-time-wrap"><i class="fas fa-stopwatch"></i> <span id="comp-time-label">20</span>s / question</h3>
+                <h3 id="comp-time-wrap"><i class="fas fa-stopwatch"></i> <span id="comp-time-label">30</span>s / question</h3>
             </div>
             <div class="arena" id="arena"></div>
         </div>
@@ -576,7 +574,8 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
         let currentMode = 'solo';
         let runMode = 'solo';
         let currentGameId = null;
-        let questionTime = 20;
+        const QUESTION_TIME = 30;      // seconds per question (solo and competition)
+        let questionTime = QUESTION_TIME;
         let teams = [];
         let running = false;
         let countdownTimer = null;
@@ -615,7 +614,7 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
         function switchScreen(screenId) {
             screens.forEach(s => s.classList.remove('active'));
             document.getElementById(screenId).classList.add('active');
-            document.body.classList.toggle('compact', screenId === 'game-screen' && runMode === 'comp');
+            document.body.classList.toggle('compact', screenId === 'game-screen');
             window.scrollTo(0, 0);
         }
 
@@ -636,7 +635,7 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
             const n = soloCount(currentBank());
             Q_PER_TEAM = readQCount();
             document.getElementById('mode-hint').innerHTML = mode === 'solo'
-                ? '<i class="fas fa-info-circle"></i> Play on your own — ' + n + ' questions in a new random order every time, no time limit.' +
+                ? '<i class="fas fa-info-circle"></i> Play on your own — ' + n + ' questions in a new random order every time, 30 seconds for each question.' +
                   (n < bankSize ? ' A new random set from ' + bankSize + ' questions every time you play.' : '')
                 : '<i class="fas fa-info-circle"></i> Two teams play at the same time, each on its own half of the screen — ' + Q_PER_TEAM + ' questions per team, shuffled every round. Highest score wins; if scores are equal, the faster team wins.';
         }
@@ -740,11 +739,12 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
             arena.innerHTML = '';
 
             if (runMode === 'solo') {
-                questionTime = 0;
+                questionTime = QUESTION_TIME;
                 arena.className = 'arena solo';
                 teams = [createTeam(0, '🎯 Your Score', pickFresh(bank, soloCount(bank), tag).map(t => buildQuestion(t, type)), true)];
                 document.getElementById('comp-title').innerText = GAME_NAMES[gameId] + ' — ' + sectionName;
-                document.getElementById('comp-time-wrap').style.display = 'none';
+                document.getElementById('comp-time-wrap').style.display = '';
+                document.getElementById('comp-time-label').innerText = questionTime;
                 document.getElementById('btn-stop').innerHTML = '<i class="fas fa-arrow-left"></i> Back';
                 switchScreen('game-screen');
                 running = true;
@@ -752,7 +752,7 @@ body.compact .container { max-width: 1500px; margin: 12px auto; padding: 10px; }
                 return;
             }
 
-            questionTime = parseInt(document.getElementById('q-time').value, 10) || 20;
+            questionTime = QUESTION_TIME;
             const names = [val('team1-name') || 'Team A', val('team2-name') || 'Team B'];
             const sets = prepareTeamSets(bank, type, document.getElementById('q-mode').value, tag);
             arena.className = 'arena';
